@@ -1,0 +1,13 @@
+Program ejercicio2;
+
+var
+	i, numero, suma: integer;
+begin
+	suma:= 0;
+	writeln('Ingrese 10 numeros');
+	for i := 1 to 10 do begin
+		readln(numero);
+		suma:= suma+numero;
+	end;
+	writeln('La suma es: ', suma);
+End.
