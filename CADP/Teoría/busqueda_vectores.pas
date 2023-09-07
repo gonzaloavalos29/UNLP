@@ -40,14 +40,14 @@ var
 begin
 	ok:= false;
 	pri:= 1; ult:= dL; medio:= (pri + ult) div 2;
-	while (pri <= ult) and (bus <> vec[medio]) do
+	while (pri <= ult) and (valor <> vec[medio]) do
 		begin
-			if (bus < vec[medio]) then
+			if (valor < vec[medio]) then
 				ult:= medio - 1;
 			else pri:= medio + 1;
 			medio:= (pri + ult) div 2;
 		end;
-	if (pri <= ult) and (bus = vec[medio]) then ok:= true;
+	if (pri <= ult) and (valor = vec[medio]) then ok:= true;
 end;
 
 // Programa principal
