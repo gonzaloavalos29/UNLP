@@ -13,10 +13,11 @@ begin
 		a^.dato:= num;
 		a^.HI:= nil;
 		a^.HD:= nil;
-	end else if (num <= a^.dato) then 
-		agregar(a^.HI, num)
-	else
-		agregar(a^.HD, num);
+	end else
+		if (num <= a^.dato) then 
+			agregar(a^.HI, num)
+		else
+			agregar(a^.HD, num);
 end;
 procedure enOrden(a: arbol);
 begin

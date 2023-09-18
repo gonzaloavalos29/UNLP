@@ -51,8 +51,7 @@ begin
         a^.dato:= r;
         a^.hi:= nil;
         a^.hd:= nil;
-    end
-    else if (a^.dato.numero > r.numero) then
+    end else if (a^.dato.numero > r.numero) then
         agregar(a^.HI, r)
     else
         agregar(a^.HD, r);
