@@ -11,6 +11,6 @@
 public class Producto {
     
     private double precio = 100;
-    private String nombre = "Pepe";
+    String nombre = "Pepe";
     private String descripcion = "Sin descripción";
 }
