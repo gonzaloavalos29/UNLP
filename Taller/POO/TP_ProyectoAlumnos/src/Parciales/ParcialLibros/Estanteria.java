@@ -53,10 +53,11 @@ public class Estanteria {
         int i = 0, j = 0;
         while (i < this.getCantEstantes() && !encontrado) {
             while (j < this.getCantLibros() && !encontrado) {
-                if (this.matriz_libros != null) {
-                    if (this.matriz_libros[i][j].getTitulo() == unTitulo) {
+                if (this.matriz_libros[i][j] != null) {
+                    if (this.matriz_libros[i][j].getTitulo().equals(unTitulo)) {
                         libro_buscado = this.matriz_libros[i][j];
                         encontrado = true;
+                        this.matriz_libros[i][j] = null;
                     }
                 }
                 j++;
