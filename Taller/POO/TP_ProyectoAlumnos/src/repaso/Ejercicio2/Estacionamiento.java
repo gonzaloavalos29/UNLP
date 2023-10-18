@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package repaso;
+package repaso.Ejercicio2;
 
 /**
  *
@@ -87,14 +87,6 @@ public class Estacionamiento {
 
     public void setNroPlazas(int nroPlazas) {
         this.nroPlazas = nroPlazas;
-    }
-
-    public Auto[][] getMatriz_autos() {
-        return matriz_autos;
-    }
-
-    public void setMatriz_autos(Auto[][] matriz_autos) {
-        this.matriz_autos = matriz_autos;
     }
     
     // Otros métodos
