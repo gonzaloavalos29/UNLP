@@ -1,0 +1,160 @@
+programa Emanuel
+procesos
+  proceso maximo(E r: numero;E tp: numero; ES rw: numero; ES tw: numero)
+  comenzar
+    si (tp > tw)
+      rw:= r
+      tw:= tp
+  fin
+  proceso receptor(ES rw: numero; ES tw: numero)
+  variables
+    r,f,p,tp: numero
+  comenzar
+    repetir 4
+      RecibirMensaje(r,*)
+      si (r = 1)
+        RecibirMensaje(f,r1)
+        RecibirMensaje(p,r1)
+        tp:= f+p
+        maximo(r,tp,rw,tw)
+      sino
+        si(r = 2)
+          RecibirMensaje(f,r2)
+          RecibirMensaje(p,r2)
+          tp:= f+p
+          maximo(r,tp,rw,tw)
+        sino
+          si (r= 3)
+            RecibirMensaje(f,r3)
+            RecibirMensaje(p,r3)
+            tp:= f+p
+            maximo(r,tp,rw,tw)
+          sino
+            RecibirMensaje(f,r4)
+            RecibirMensaje(p,r4)
+            tp:= f+p
+            maximo(r,tp,rw,tw)
+  fin
+  proceso cancelar
+  comenzar
+    EnviarMensaje(F,r1)
+    EnviarMensaje(F,r2)
+    EnviarMensaje(F,r3)
+    EnviarMensaje(F,r4)
+  fin
+  proceso ruleta
+  variables
+    r: numero
+  comenzar
+    repetir 10
+      Random(r,1,4)
+      si (r = 1)
+        EnviarMensaje(V,r1)
+      sino
+        si (r = 2)
+          EnviarMensaje(V,r2)
+        sino
+          si (r= 3)
+            EnviarMensaje(V,r3)
+          sino
+            EnviarMensaje(V,r4)
+  fin
+  proceso juntarF( ES f: numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      f:=f+1
+  fin
+  proceso juntarP(ES p: numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      p:= p+1
+  fin
+  proceso juntar(ES f:numero; ES p: numero)
+  comenzar
+    juntarF(f)
+    juntarP(p)
+  fin
+  proceso esquina(ES f:numero; ES p:numero)
+  variables
+    av,ca: numero
+  comenzar
+    Random(av,0,50)
+    Random(ca,0,50)
+    Pos(av+25,ca+25)
+    juntar(f,p)
+  fin
+  proceso reset(E q: numero)
+  variables
+    av,qa: numero
+    bah: boolean
+  comenzar
+    av:= 25
+    qa:= 1
+    bah:= F
+    mientras ~(bah)
+      si (qa = q)
+        Pos(av,1)
+        bah:= V
+      sino
+        av:= av+5
+        qa:= qa+1
+  fin
+areas
+  areac: AreaPC(25,25,75,75)
+  areaj: AreaP(1,1,1,1)
+  area1: AreaP(25,1,25,1)
+  area2: AreaP(30,1,30,1)
+  area3: AreaP(35,1,35,1)
+  area4: AreaP(40,1,40,1)
+robots
+  robot juntador
+  variables
+    f,p,q: numero
+    ok:boolean
+  comenzar
+    RecibirMensaje(q,rf)
+    ok:= V
+    mientras (ok)
+      RecibirMensaje(ok,rf)
+      si (ok) 
+        esquina(f,p)
+        reset(q)
+    EnviarMensaje(q,rf)
+    EnviarMensaje(f,rf)
+    EnviarMensaje(p,rf)
+  fin
+  robot jefe
+  variables
+    rw,tw: numero
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+    ruleta
+    cancelar
+    tw:=0
+    receptor(rw,tw)
+    Informar(rw,tw)
+  fin
+variables
+  rf: jefe
+  r1,r2,r3,r4: juntador
+comenzar
+  AsignarArea(rf,areaj)
+  AsignarArea(r1,areac)
+  AsignarArea(r1,area1)
+  AsignarArea(r2,areac)
+  AsignarArea(r2,area2)
+  AsignarArea(r3,areac)
+  AsignarArea(r3,area3)
+  AsignarArea(r4,areac)
+  AsignarArea(r4,area4)
+  Iniciar(rf,1,1)
+  Iniciar(r1,25,1)
+  Iniciar(r2,30,1)
+  Iniciar(r3,35,1)
+  Iniciar(r4,40,1)
+fin

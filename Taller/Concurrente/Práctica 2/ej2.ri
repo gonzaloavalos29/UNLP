@@ -1,0 +1,86 @@
+programa ejercicio2
+procesos
+{ Junta todas las flores de una esquina }
+  proceso juntarFlores(ES cantF: numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      cantF:= cantF + 1
+  fin  
+{ Junta todos los papeles de una esquina }
+  proceso juntarPapeles(ES cantP: numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      cantP:= cantP + 1
+  fin
+  proceso calcularMasFloresQuePapeles(E cantF: numero; E cantP: numero; ES cantEscalones: numero)
+  comenzar
+    si (cantF > cantP)
+      cantEscalones:= cantEscalones + 1
+  fin
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+  proceso recorrerEscalon(ES cantEscalones: numero)
+  variables
+    cantF, cantP, alto: numero
+  comenzar
+    cantF:= 0
+    cantP:= 0
+    Random(alto,1,5)
+    repetir alto
+      juntarPapeles(cantP)
+      juntarFlores(cantF)
+      mover
+    juntarPapeles(cantP)
+    juntarFlores(cantF)
+    calcularMasFloresQuePapeles(cantF, cantP, cantEscalones)
+    derecha
+    mover
+    izquierda
+  fin
+areas
+  areaRobotJefe: AreaP(1,1,1,1)
+  area1: AreaP(2,1,6,20)
+  area2: AreaP(7,1,11,20)
+  area3: AreaP(12,1,16,20)
+robots
+  robot recolector
+  variables
+    cantEscalones: numero
+  comenzar
+    cantEscalones:= 0
+    repetir 4
+      recorrerEscalon(cantEscalones)
+    EnviarMensaje(cantEscalones, jefe)
+  fin
+  robot rJefe
+  variables
+    totalEscalones, escalon: numero
+  comenzar
+    totalEscalones:= 0
+    repetir 3
+      RecibirMensaje(escalon, *)
+      totalEscalones:= totalEscalones + escalon
+    Informar(totalEscalones) { Informa antes de finalizar los recorridos }
+  fin
+variables
+  r1: recolector
+  r2: recolector
+  r3: recolector
+  jefe: rJefe
+comenzar
+{ AREAS }
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area2)
+  AsignarArea(r3, area3)
+  AsignarArea(jefe, areaRobotJefe)
+{ INICIALIZACIÓN}
+  Iniciar(r1,2,1)
+  Iniciar(r2,7,1)
+  Iniciar(r3,12,1)
+  Iniciar(jefe,1,1)
+fin

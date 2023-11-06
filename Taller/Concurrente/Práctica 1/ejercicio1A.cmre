@@ -1,0 +1,45 @@
+programa ejercicio1
+procesos
+  proceso juntarFlores(ES cantFlores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantFlores:= cantFlores + 1
+  fin
+  proceso recorrerAvenida(ES cantFlores: numero; ES esqSinFlores: numero)
+  comenzar
+    esqSinFlores:= 0
+    cantFlores:= 0
+    mientras PosCa < 100
+      si HayFlorEnLaEsquina
+        juntarFlores(cantFlores)
+        mover
+      sino
+        esqSinFlores:= esqSinFlores + 1
+        mover
+    si HayFlorEnLaEsquina
+      juntarFlores(cantFlores)
+    sino
+      esqSinFlores:= esqSinFlores + 1
+    Informar(cantFlores)
+    Informar(esqSinFlores)
+  fin
+areas
+  ciudad: AreaC(1,1,5,100)
+robots
+  robot tipo1
+  variables
+    cantFlores, esquinasVacias: numero
+  comenzar
+    recorrerAvenida(cantFlores, esquinasVacias)
+    Pos(3,1)
+    recorrerAvenida(cantFlores, esquinasVacias)
+    Pos(5,1)
+    recorrerAvenida(cantFlores, esquinasVacias)
+  fin
+variables
+  robot1: tipo1
+comenzar
+  AsignarArea(robot1, ciudad)
+  Iniciar(robot1,1,1)
+fin

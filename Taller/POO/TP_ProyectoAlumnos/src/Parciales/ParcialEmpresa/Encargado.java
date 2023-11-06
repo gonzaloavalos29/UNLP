@@ -1,4 +1,4 @@
-package parcialturnof;
+package Parciales.ParcialEmpresa;
 
 /*
 cantidad de empleados a cargo

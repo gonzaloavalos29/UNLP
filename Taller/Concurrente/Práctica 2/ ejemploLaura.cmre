@@ -1,0 +1,41 @@
+programa recepcionMaximo
+areas
+  area1: AreaPC(1,1,20,20)
+procesos
+  proceso rectangulo(E alto: numero; E ancho: numero; ES flores: numero)
+  comenzar
+  fin
+robots
+  robot juntador
+  variables
+    altura, ancho, f, quin: numero
+  comenzar
+    RecibirMensaje(quien, robot3)
+    RecibirMensaje(altura, robot3)
+    RecibirMensaje(ancho, robot3)
+    rectangulo(altura, ancho, f)
+    EnviarMensaje(quien, robot3)
+    EnviarMensaje(f, robot3)
+  fin
+robot jefe
+  variables
+    max, rmax, f: numero
+  comenzar
+    max:= 0
+    EnviarMensaje(1, robot1)
+    EnviarMensaje(5, robot1)
+    EnviarMensaje(3, robot1)
+    EnviarMensaje(2, robot2)
+    EnviarMensaje(8, robot2)
+    EnviarMensaje(2, robot2)
+    repetir 2
+      RecibirMensaje(quien, *)
+      si (quien = 1)
+        RecibirMensaje(f, robot1)
+      sino
+        RecibirMensaje(f, robot2)
+      si (f >= max)
+        max:= f
+        rmax:= quien
+    Informar(rmax)
+  fin

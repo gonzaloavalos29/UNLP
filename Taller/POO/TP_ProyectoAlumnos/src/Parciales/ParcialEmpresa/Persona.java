@@ -1,4 +1,4 @@
-package parcialturnof;
+package Parciales.ParcialEmpresa;
 
 /*
 nombre, DNI, año de

@@ -1,4 +1,4 @@
-package parcialturnof;
+package Parciales.ParcialEmpresa;
 
 /*
 monto destinado a viáticos

@@ -1,0 +1,73 @@
+programa ejercicio3
+procesos
+  proceso juntarPapeles(ES total: numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      total:= total + 1
+  fin
+  proceso juntarFlores(ES total: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      total:= total + 1
+  fin
+  proceso juntarP(ES cantP: numero)
+  comenzar
+    derecha
+    repetir 9
+      juntarPapeles(cantP)
+      mover
+  fin
+  proceso juntarF(ES cantF: numero)
+  comenzar
+    derecha
+    repetir 9
+      juntarFlores(cantF)
+      mover
+  fin
+areas
+  ciudad: AreaC(1,1,100,100)
+robots
+  robot robot1
+  variables
+    cantP: numero
+    cantF: numero
+  comenzar
+    cantP:= 0
+    cantF:= 0
+    si (PosCa = 1)
+      juntarP(cantP)
+      EnviarMensaje(cantP, A2)
+    sino
+      juntarF(cantF)
+      EnviarMensaje(cantF, B2)
+  fin
+  robot robot2
+  variables
+    cantP, cantF: numero
+  comenzar  
+    si (PosCa = 1)
+      RecibirMensaje(cantP, A1)
+      juntarP(cantP)
+      Informar(cantP)
+    sino
+      RecibirMensaje(cantF, B1)
+      juntarF(cantF)
+      Informar(cantF)
+  fin
+variables
+  A1: robot1
+  A2: robot2
+  B1: robot1
+  B2: robot2
+comenzar
+  AsignarArea(A1, ciudad)
+  AsignarArea(A2, ciudad)
+  AsignarArea(B1, ciudad)
+  AsignarArea(B2, ciudad)
+  Iniciar(A1,1,1)
+  Iniciar(A2,11,1)
+  Iniciar(B1,1,5)
+  Iniciar(B2,11,5)
+fin

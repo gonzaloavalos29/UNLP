@@ -1,4 +1,6 @@
-package parcialturnof;
+package Parciales.ParcialEmpresa;
+
+import java.time.Clock;
 
 /*
 nombre, direccion, Director, vector de Encargados hasta N
@@ -67,8 +69,11 @@ public class Empresa {
         
         //Encargados
         for (int i = 0; i < this.vec_dimF; i++) {
-            if (this.vec_encargados[i] != null)
+            if (this.vec_encargados[i] != null) {
                 aux = aux + "(Nro. sucursal: " + (i+1) + " / " + this.vec_encargados[i].toString() + "\n)";
+            } else {
+                aux = aux + "(Sin encargado)" + "\n";
+            }
         }
         
         //Devolver toString
