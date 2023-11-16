@@ -1,0 +1,98 @@
+programa AvalosGonzalo
+procesos
+  proceso juntarPapeles(ES cantPapeles: numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantPapeles:= cantPapeles + 1
+  fin
+  proceso recorrerLado(E longitud: numero; ES cantPapeles: numero; ES esqConPapeles: numero)
+  comenzar
+    repetir longitud
+      mover
+      si HayPapelEnLaEsquina
+        juntarPapeles(cantPapeles)
+        esqConPapeles:= esqConPapeles + 1
+  fin
+  proceso depositarPapeles(ES cantPapeles: numero)
+  variables
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    BloquearEsquina(99, 99)
+    Pos(99, 99)
+    repetir cantPapeles
+      depositarPapel
+    Pos(avIni, caIni)
+    LiberarEsquina(99, 99)
+    cantPapeles:= 0
+  fin
+areas
+  esqComun: AreaC(99, 99, 99, 99)
+  area4: AreaP(1,1,1,1)
+  area1: AreaP(2, 1, 18, 13)
+  area2: AreaP(32, 1, 48, 13)
+  area3: AreaP(62, 1, 78, 13)
+robots
+  robot papelero
+  variables
+    esqConPapeles, cantPapeles, randAlto, randAncho: numero
+    respuesta: boolean
+  comenzar
+    cantPapeles:= 0
+    esqConPapeles:= 0
+    repetir 4
+      Random(randAlto, 1, 3)
+      Random(randAncho, 1, 4)
+      recorrerLado(randAlto, cantPapeles, esqConPapeles)
+      depositarPapeles(cantPapeles)
+      derecha
+      recorrerLado(randAncho, cantPapeles, esqConPapeles)
+      depositarPapeles(cantPapeles)
+      repetir 3
+        derecha
+      EnviarMensaje(V, F1)
+      RecibirMensaje(respuesta, F1)
+    EnviarMensaje(esqConPapeles, F1)      
+  fin
+  robot fiscalizador
+  variables
+    cantVacias, cantTotalVacias, cantPapeles: numero
+    respuesta: boolean
+  comenzar
+    cantTotalVacias:= 0
+    cantVacias:= 0
+    repetir 4
+      repetir 3
+        RecibirMensaje(respuesta, *)
+      EnviarMensaje(V, P1)
+      EnviarMensaje(V, P2)
+      EnviarMensaje(V, P3)
+    repetir 3
+      RecibirMensaje(cantVacias, *)
+      cantTotalVacias:= cantTotalVacias + cantVacias
+    Pos(99, 99)
+    juntarPapeles(cantPapeles)
+    Informar('Cantidad_de_esquinas_sin_papeles ', cantTotalVacias)
+  fin
+variables
+  P1: papelero
+  P2: papelero
+  P3: papelero
+  F1: fiscalizador
+comenzar
+  AsignarArea(F1, area4)
+  AsignarArea(F1, esqComun)
+  AsignarArea(P1, area1)
+  AsignarArea(P1, esqComun)
+  AsignarArea(P2, area2)
+  AsignarArea(P2, esqComun)
+  AsignarArea(P3, area3)
+  AsignarArea(P3, esqComun)
+  
+  Iniciar(F1, 1, 1)
+  Iniciar(P1, 2, 1)
+  Iniciar(P2, 32, 1)
+  Iniciar(P3, 62, 1)
+fin

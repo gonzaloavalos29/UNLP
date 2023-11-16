@@ -1,0 +1,160 @@
+programa parcialTurnoH
+procesos
+  proceso juntarFlores(ES cantFlores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantFlores:= cantFlores + 1
+  fin
+  proceso cuadrado(ES lado: numero; ES cantFlores: numero)
+  comenzar
+    repetir 4
+      repetir lado
+        juntarFlores(cantFlores)
+        mover
+      derecha
+    Pos(PosAv, PosCa + lado + 1)
+  fin
+  proceso recogerFlores(ES cantFlores: numero)
+  variables
+    av, ca: numero
+  comenzar
+    av:= PosAv
+    ca:= PosCa
+    BloquearEsquina(50, 50)
+    Pos(50, 50)
+    juntarFlores(cantFlores)
+    Pos(av, ca)
+    LiberarEsquina(50, 50)
+  fin
+  proceso depositarFlores(ES cantFlores: numero)
+  variables
+    av, ca: numero
+  comenzar
+    av:= PosAv
+    ca:= PosCa
+    repetir cantFlores
+      BloquearEsquina(50, 50)
+      Pos(50, 50)
+      depositarFlor
+      Pos(av, ca)
+      LiberarEsquina(50, 50)
+    cantFlores:= 0
+  fin
+  proceso sincronizacion(E id: numero)
+  variables
+    confirmacion: boolean
+  comenzar
+    si (id = 1)
+      EnviarMensaje(V, r2)
+      EnviarMensaje(V, r3)
+    sino
+      si (id = 2)
+        EnviarMensaje(V, r1)
+        EnviarMensaje(V, r3)
+      sino
+        EnviarMensaje(V, r1)
+        EnviarMensaje(V, r2)
+    repetir 2
+      RecibirMensaje(confirmacion, *)
+  fin
+areas
+  esqComun: AreaC(50, 50, 50, 50)
+  area1: AreaC(1, 1, 38, 22)
+  area4: AreaP(100, 100, 100, 100)
+robots
+  robot recolector
+  variables
+    randLado, id, cantFlores: numero
+    totalFlores: numero
+    confirmacion: boolean
+  comenzar
+    cantFlores:= 0
+    totalFlores:= 0
+    RecibirMensaje(id, c1)
+    RecibirMensaje(randLado, c1)
+    repetir 3
+      cuadrado(randLado, cantFlores)
+      totalFlores:= totalFlores + cantFlores
+      depositarFlores(cantFlores)
+      sincronizacion(id)
+      EnviarMensaje(id, c1)
+      mientras ~(confirmacion)
+        RecibirMensaje(confirmacion, c1)
+    EnviarMensaje(id, c1)
+    EnviarMensaje(totalFlores, c1)
+  fin
+  robot coordinador
+  variables
+    randLado: numero
+    id: numero
+    cantFlores, cantFlores1, cantFlores2, cantFlores3: numero
+    max, robotMax: numero
+  comenzar
+    EnviarMensaje(1, r1)
+    EnviarMensaje(2, r2)
+    EnviarMensaje(3, r3)
+    Random(randLado, 1, 6)
+    EnviarMensaje(randLado, r1)
+    Random(randLado, 1, 6)
+    EnviarMensaje(randLado, r2)
+    Random(randLado, 1, 6)
+    EnviarMensaje(randLado, r3)
+    repetir 9
+      RecibirMensaje(id, *)
+      si (id = 1)
+        recogerFlores(cantFlores)
+        EnviarMensaje(V, r1)
+      sino
+        si (id = 2)
+          recogerFlores(cantFlores)
+          EnviarMensaje(V, r2)
+        sino
+          recogerFlores(cantFlores)
+          EnviarMensaje(V, r3)
+    repetir 3
+      RecibirMensaje(id, *)
+      si (id = 1)
+        RecibirMensaje(cantFlores1, r1)
+      sino
+        si (id = 2)
+          RecibirMensaje(cantFlores2, r2)
+        sino
+          RecibirMensaje(cantFlores3, r3)
+    si ((cantFlores1 > cantFlores2) & (cantFlores1 > cantFlores3))
+      max:= cantFlores1
+      robotMax:= 1
+    sino
+      si ((cantFlores2 > cantFlores3) & (cantFlores2 > cantFlores1))
+        max:= cantFlores2
+        robotMax:= 2
+      sino
+        si ((cantFlores3 > cantFlores2) & (cantFlores3 > cantFlores1))
+          max:= cantFlores3
+          robotMax:= 3
+        sino
+          max:= 0
+          robotMax:= 0
+    Informar('Robot_con_mayor_cantidad_de_flores_recogidas_ ', robotMax)
+  fin
+variables
+  r1: recolector
+  r2: recolector
+  r3: recolector
+  c1: coordinador
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area1)
+  AsignarArea(r3, area1)
+  AsignarArea(c1, area4)
+  
+  AsignarArea(r1, esqComun)
+  AsignarArea(r2, esqComun)
+  AsignarArea(r3, esqComun)
+  AsignarArea(c1, esqComun)
+  
+  Iniciar(r1, 1, 1)
+  Iniciar(r2, 10, 1)
+  Iniciar(r3, 20, 1)
+  Iniciar(c1, 100, 100)
+fin
