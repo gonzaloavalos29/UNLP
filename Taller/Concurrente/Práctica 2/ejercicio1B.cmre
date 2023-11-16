@@ -1,4 +1,4 @@
-programa ejercicio2
+programa ejercicio1B
 procesos
   proceso juntarFlores(ES cantFlores: numero)
   comenzar

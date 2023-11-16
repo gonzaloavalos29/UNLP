@@ -1,0 +1,100 @@
+programa Emanuel
+procesos
+  proceso juntarP(ES n: numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina) & (n < 5)
+      tomarPapel
+      n:= n+1
+  fin
+  proceso esquina50(ES n: numero)
+  variables
+    a,c:numero
+  comenzar
+    a:= PosAv
+    c:= PosCa
+    BloquearEsquina(50,50)
+    Pos(50,50)
+    repetir 5
+      depositarPapel
+    n:= 0
+    Pos(a,c)
+    LiberarEsquina(50,50)
+    EnviarMensaje(V,c1)
+    EnviarMensaje(V,c2)
+  fin
+  proceso buscar(ES cant: numero)
+  variables
+    av,ca,n,r: numero
+  comenzar
+    av:= PosAv
+    ca:= PosCa
+    Random(n,2,5)
+    r:= n
+    BloquearEsquina(50,50)
+    Pos(50,50)
+    mientras(HayPapelEnLaEsquina) & ~(n = 0)
+      tomarPapel
+      n:= n-1
+    Pos(av,ca)
+    LiberarEsquina(50,50)
+    si (n = 0)
+      repetir r
+        depositarPapel
+    sino
+      cant:= cant + 1
+  fin
+areas
+  areap1: AreaPC(5,1,5,100)
+  areap2: AreaPC(10,1,10,100)
+  area50: AreaC(50,50,50,50)
+  areac1: AreaP(11,1,11,1)
+  areac2: AreaP(12,1,12,1)
+robots
+  robot productor
+  variables
+    p: numero
+  comenzar
+    p:= 0
+    mientras(PosCa < 100)
+      juntarP(p)
+      si (p = 5)
+        esquina50(p)
+      sino
+        mover
+    mientras(HayPapelEnLaEsquina)
+      juntarP(p)
+      si (p = 5)
+        esquina50(p)
+    EnviarMensaje(F,c1)
+    EnviarMensaje(F,c2)
+  fin
+  robot consumidor
+  variables
+    n: numero
+    ok: boolean
+  comenzar
+    n:= 0
+    RecibirMensaje(ok,*)
+    mientras (ok) | (n < 8)
+      buscar(n)
+      si (ok)
+        RecibirMensaje(ok,*)
+
+  fin
+variables
+  r1,r2: productor
+  c1,c2: consumidor
+comenzar
+  AsignarArea(r1,areap1)
+  AsignarArea(r1,area50)
+  AsignarArea(r2,areap2)
+  AsignarArea(r2,area50)
+  AsignarArea(c1,areac1)
+  AsignarArea(c1,area50)
+  AsignarArea(c2,areac2)
+  AsignarArea(c2,area50)
+  Iniciar(r1,5,1)
+  Iniciar(r2,10,1)
+  Iniciar(c1,11,1)
+  Iniciar(c2,12,1)
+fin

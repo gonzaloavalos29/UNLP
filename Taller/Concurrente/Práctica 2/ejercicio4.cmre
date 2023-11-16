@@ -1,0 +1,44 @@
+programa ejercicio4
+procesos
+  proceso juntar(ES cantJuntada: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantJuntada:= cantJuntada + 1
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantJuntada:= cantJuntada + 1
+  fin
+  proceso avisar(E id: numero)
+  comenzar
+    si (id = 1) { Conceder autorizaciones }
+      EnviarMensaje(v, reco1)
+    sino
+      si (id = 2)
+        EnviarMensaje(v, reco2)
+      sino
+        si (id = 3)
+          EnviarMensaje(v, reco3)
+        sino
+          EnviarMensaje(v, reco4)
+  fin
+  proceso acabarProceso(E id: numero)
+  comenzar
+    EnviarMensaje(F, reco1)
+    EnviarMensaje(F, reco2)
+    EnviarMensaje(F, reco3)
+    EnviarMensaje(F, reco4)
+    si (id = 1)
+      EnviarMensaje(V, reco1)
+      EnviarMensaje(F, reco2)
+      EnviarMensaje(F, reco3)
+      EnviarMensaje(F, reco4)
+    sino
+      si (id = 2)
+        EnviarMensaje(F, reco1)
+        EnviarMensaje(V, reco2)
+        EnviarMensaje(F, reco3)
+        EnviarMensaje(F, reco4)
+      sino
+        si (id = 3)
+          EnviarMensaje(F, reco1

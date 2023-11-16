@@ -12,7 +12,7 @@ procesos
   fin
   proceso limpiar
   comenzar
-    si (PosAv < 26) | (PosAv > 50) & (PosAv <76)
+    si (PosAv < 26) | ((PosAv > 50) & (PosAv < 76))
       limpiarFlores
     sino
       limpiarPapeles
@@ -24,11 +24,11 @@ procesos
   comenzar
     avenidaInicial:= PosAv
     calleInicial:= PosCa
-    repetir limite
+    repetir (limite-1)
       repetir 24
         limpiar
         mover
-      Pos(PosAv - 24, PosCa + 1)
+      Pos(avenidaInicial, PosCa+1)
     repetir 24
       limpiar
       mover
@@ -43,9 +43,9 @@ robots
   robot tipo1
   comenzar
     derecha
-    recorrerArea(99)
+    recorrerArea(100)
     Pos(PosAv + 50, 1)
-    recorrerArea(99)
+    recorrerArea(100)
   fin
 variables
   robPares: tipo1

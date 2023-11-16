@@ -46,16 +46,15 @@ robots
   fin
   robot robot2
   variables
-    cantP, cantF: numero
+    cantObjetos: numero
   comenzar  
     si (PosCa = 1)
-      RecibirMensaje(cantP, A1)
-      juntarP(cantP)
-      Informar(cantP)
+      RecibirMensaje(cantObjetos, A1)
+      juntarP(cantObjetos)
     sino
-      RecibirMensaje(cantF, B1)
-      juntarF(cantF)
-      Informar(cantF)
+      RecibirMensaje(cantObjetos, B1)
+      juntarF(cantObjetos)
+    Informar(cantObjetos)
   fin
 variables
   A1: robot1

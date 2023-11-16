@@ -1,0 +1,91 @@
+programa ejerfcico2
+procesos 
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+  proceso juntar(ES elemento:numero;E id:numero)
+  comenzar
+    si id=1
+      mientras HayFlorEnLaEsquina
+        tomarFlor
+        elemento:=elemento+1
+    si id=2
+      mientras HayPapelEnLaEsquina
+        tomarPapel
+        elemento:=elemento+1
+  fin
+  proceso lado(E cant:numero;ES elemento:numero;E id:numero)
+  comenzar
+    repetir cant
+      juntar(elemento,id)
+      mover
+  fin
+  proceso escalon(ES cant:numero;ES elemento:numero;E id:numero)
+  comenzar
+    lado(cant,elemento,id)
+    si id=1
+      derecha
+    sino 
+      izquierda
+    lado (cant,elemento,id)
+    si id=1
+      izquierda
+    sino 
+      derecha
+  fin
+areas
+  areac: AreaC(1,1,100,100)
+robots
+  robot tipo1
+  variables
+    elem:numero
+    cant:numero
+    id:numero
+  comenzar
+    RecibirMensaje(id,*)
+    cant:=5
+    mientras cant>0
+      si (cant=1)
+        BloquearEsquina(16,15)
+      escalon(cant,elem,id)
+      si (cant=1)
+        si (id=1)
+          Pos(15,16)
+          izquierda
+        sino
+          Pos(17,16)
+          derecha
+        LiberarEsquina(16,15)
+      cant:=cant-1
+    cant:=2
+    mientras cant<6
+      escalon(cant,elem,id)
+      cant:=cant+1
+    Informar(elem)
+    EnviarMensaje(id,rJ)
+  fin
+  robot jefe
+  variables
+    id1:numero
+    id2:numero
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    RecibirMensaje(id1,*)
+    RecibirMensaje(id2,*)
+    Informar(id1)
+  fin
+variables
+  r1:tipo1
+  r2:tipo1
+  rJ:jefe
+comenzar
+  AsignarArea(r1,areac)
+  AsignarArea(r2,areac)
+  AsignarArea(rJ,areac)
+  Iniciar(rJ,15,1)
+  Iniciar(r1,1,1)
+  Iniciar(r2,31,1)
+fin
