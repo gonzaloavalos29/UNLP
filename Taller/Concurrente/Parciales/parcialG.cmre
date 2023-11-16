@@ -16,9 +16,9 @@ procesos
     Pos(99, 99)
     repetir cantPapeles
       depositarPapel
-    cantPapeles:= 0
     Pos(avVie, caVie)
     LiberarEsquina(99, 99)
+    cantPapeles:= 0
   fin
   proceso recorrerTramo(E tmn: numero; ES cantPapeles: numero; ES esqNoVacias: numero)
   comenzar
@@ -41,7 +41,7 @@ robots
     cantPapeles, esqNoVacias, randAlto, randAncho: numero
     respuesta: boolean
   comenzar
-    {InicializaciÃ³n de variables}
+    {Inicializacion de variables}
     esqNoVacias:= 0
     cantPapeles:= 0
     {Recorrido}
@@ -55,7 +55,7 @@ robots
       irAlDeposito(cantPapeles)
       repetir 3
         derecha
-      {SincronizaciÃ³n barrera}
+      {Sincronizacion barrera}
       EnviarMensaje(V, FS)
       RecibirMensaje(respuesta, FS)
     {Enviar cantidad de esquinas no vacias}
@@ -66,12 +66,12 @@ robots
     cantPapeles, cantActual, cantTotal: numero
     respuesta: boolean
   comenzar
-    {InicializaciÃ³n de variables}
+    {Inicializacion de variables}
     cantPapeles:= 0
     cantTotal:= 0
     {Programa principal}
     repetir 4
-      {SincronizaciÃ³n barrera}
+      {Sincronizacion barrera}
       repetir 3
         RecibirMensaje(respuesta, *)
       EnviarMensaje(V, R1)
@@ -107,3 +107,4 @@ comenzar
   Iniciar(R3, 62, 1)
   Iniciar(FS, 1, 1)
 fin
+

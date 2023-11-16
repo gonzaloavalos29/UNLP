@@ -17,7 +17,7 @@ procesos
     si (tipoAccion = 0)
       repetir 10
         depositarFlor
-      cantFlores:= cantFlores - 1
+        cantFlores:= cantFlores - 1
     sino
       mientras HayFlorEnLaEsquina
         tomarFlor
@@ -71,7 +71,6 @@ comenzar
   AsignarArea(cosechador, esqCosechador)
   AsignarArea(r1, esqComun)
   AsignarArea(r2, esqComun)
-  AsignarArea(cosechador, esqCosechador)
   Iniciar(r1, 1, 3)
   Iniciar(r2, 1, 4)
   Iniciar(cosechador, 1, 5)

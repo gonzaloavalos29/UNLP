@@ -77,7 +77,7 @@ robots
       cuadrado(randLado, cantFlores)
       totalFlores:= totalFlores + cantFlores
       depositarFlores(cantFlores)
-      sincronizacion(id)
+      {sincronizacion(id)}
       EnviarMensaje(id, c1)
       mientras ~(confirmacion)
         RecibirMensaje(confirmacion, c1)

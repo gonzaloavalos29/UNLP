@@ -21,7 +21,7 @@ robots
   fin
   robot tipo2
   variables
-    id, flores, lado, al, cl: numero
+    id, flores, lado, avIni, caIni: numero
     termine, empeza: boolean
   comenzar
     RecibirMensaje(id, robot4)
@@ -45,13 +45,13 @@ robots
           EnviarMensaje(termine, robot1)
       repetir 2
         RecibirMensaje(empeza, *)
-    al:= PosAv
-    cl:= PosCa
+    avIni:= PosAv
+    caIni:= PosCa
     repetir flores
       BloquearEsquina(50,50)
       Pos(50,50)
       depositarFlor
-      Pos(al,cl)
+      Pos(avIni,caIni)
       LiberarEsquina(50,50)
   fin
 variables
