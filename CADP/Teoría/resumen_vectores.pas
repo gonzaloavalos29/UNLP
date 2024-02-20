@@ -1,19 +1,3 @@
-// ORDENAR POR MÉTODO DE SELECCIÓN
-procedure ordenar(var v: numeros; dL: integer);
-var
-	i, j, p, item: integer;
-begin
-	for i:= 1 to dL-1 do begin // Busca el mínimo v[p] entre v[i], ..., v[N] }
-		p:= i;
-		for j:= i+1 to dL do
-			if v[j] < v[p] then
-				p:= j;
-		{ intercambia v[i] y v[p] }
-		item:= v[p];
-		v[p]:= v[i];
-		v[i]:= item;
-	end;
-end;
 // AGREGAR
 procedure agregar(var a: numeros; var dl: integer;{ var pude: boolean;} num: integer);
 begin
@@ -101,4 +85,21 @@ begin
 	if (pri <= ult) and (valor = v[medio]) then 
 		ok:= true;
 	existe:= ok;
+end;
+
+// ORDENAR POR MÉTODO DE SELECCIÓN
+procedure ordenar(var v: numeros; dL: integer);
+var
+	i, j, p, item: integer;
+begin
+	for i:= 1 to dL-1 do begin // Busca el mínimo v[p] entre v[i], ..., v[N] }
+		p:= i;
+		for j:= i+1 to dL do
+			if v[j] < v[p] then
+				p:= j;
+		{ intercambia v[i] y v[p] }
+		item:= v[p];
+		v[p]:= v[i];
+		v[i]:= item;
+	end;
 end;

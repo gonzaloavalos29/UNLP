@@ -28,11 +28,11 @@ end;
 
 procedure insertarOrdenado(var l: lista; j: jugador);
 var
-	nue: lista;
+	aux: lista;
 	act, ant: lista; // Punteros auxiliares para recorrido
 begin
-	new(nue);
-	nue^.dato:= j;
+	new(aux);
+	aux^.dato:= j;
 	act:= l; { ubico act y ant al inicio de la lista }
 	ant:= l;
 	while (act <> nil) and (j.altura < act^.dato.altura) do begin
@@ -40,10 +40,10 @@ begin
 		act:= act^.sig;
 	end;
 	if (ant = act) then {al inicio o lista vacía}
-		l:= nue;
+		l:= aux;
 	else {al medio o al final}
-		ant^.sig:= nue;
-	nue^.sig:= act;
+		ant^.sig:= aux;
+	aux^.sig:= act;
 end;
 
 {procedure insertarOrdenado(var l: lista; r: registro);
@@ -172,4 +172,3 @@ begin
 		dispose(act);
 	end;
 end;
-			
