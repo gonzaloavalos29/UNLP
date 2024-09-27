@@ -1,0 +1,53 @@
+EOI EQU 20H
+IMR EQU 21H
+INT0 EQU 24H
+INT1 EQU 25H
+CONT EQU 10H
+COMP EQU 11H
+
+ORG 1000H
+MSJ  DB  "NO DEBO PROGRAMAR EN ASSEMBLER"
+NUEVALINEA  DB  13
+FIN  DB  ?
+FLAG  DB  0
+
+ORG 3200H
+MANEJARF10: MOV FLAG, 1 
+            MOV AL, 20H
+            OUT EOI, AL
+            IRET
+
+ORG 3000H
+MANEJADOR:  MOV AL, 0
+            OUT CONT, AL
+            ; EJECUTA CADA 5 SEGUNDOS
+            MOV BX, OFFSET MSJ
+            MOV AL, OFFSET FIN - OFFSET MSJ
+            INT 7
+            MOV AL, 20H
+            OUT EOI, AL
+            IRET
+
+ORG 32 ; 8 * 4 = 32
+DIR_MANEJADOR  DW  3000H
+
+ORG 60 ; 15 * 4 = 60
+DIR_MANEJADORF10  DW  3200H
+
+ORG 2000H
+      CLI
+      MOV AL, 0FCH ; 1111 1100
+      OUT IMR, AL
+      MOV AL, 15
+      OUT INT0, AL
+      MOV AL, 8
+      OUT INT1, AL
+      MOV AL, 0
+      OUT CONT, AL
+      MOV AL, 5
+      OUT COMP, AL
+      STI
+LOOP: CMP FLAG, 1
+      JNZ LOOP
+INT 0
+END
