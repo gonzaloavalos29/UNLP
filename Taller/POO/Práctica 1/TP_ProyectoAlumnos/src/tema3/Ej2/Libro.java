@@ -1,7 +1,7 @@
 /*
 Clase Libro a la cual se agregaron constructores. 
  */
-package tema3;
+package tema3.Ej2;
 
 /**
  *
@@ -16,7 +16,7 @@ public class Libro {
    private double precio; 
      
     
-    public Libro(  String unTitulo,  String unaEditorial, 
+    public Libro(String unTitulo,  String unaEditorial, 
     int unAñoEdicion,  String unPrimerAutor, String unISBN, double unPrecio){
          titulo = unTitulo;
          editorial = unaEditorial; 
@@ -26,7 +26,7 @@ public class Libro {
          precio = unPrecio;
     }
     
-    public Libro(  String unTitulo,  String unaEditorial, String unPrimerAutor, String unISBN){
+    public Libro(String unTitulo,  String unaEditorial, String unPrimerAutor, String unISBN){
          titulo = unTitulo;
          editorial = unaEditorial; 
          añoEdicion= 2015;
@@ -86,7 +86,7 @@ public class Libro {
     public String toString(){
         String aux;
         aux= titulo + " por " + primerAutor + " - " + añoEdicion + " - " + " ISBN: " + ISBN;
-       return ( aux);
+       return (aux);
     }
         
 }

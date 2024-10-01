@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tema4;
+package tema4.Ej1;
 
 
 public abstract class Figura {
@@ -16,13 +16,13 @@ public abstract class Figura {
     }
     
     public String toString(){
-        String aux = "Area: " + this.calcularArea() +
-                     " CR: "  + getColorRelleno() + 
-                      " CL: " + getColorLinea();             
-             return aux;
-       }
+        String aux = "Perímetro: " + this.calcularPerimetro() +
+                     " | Area: " + this.calcularArea() +
+                     " | CR: "  + getColorRelleno() + 
+                     " | CL: " + getColorLinea();             
+        return aux;
+    }
 
-    
     public String getColorRelleno(){
         return colorRelleno;       
     }
@@ -34,6 +34,11 @@ public abstract class Figura {
     }
     public void setColorLinea(String unColor){
         colorLinea = unColor;       
+    }
+    
+    public void despintar() {
+        this.setColorLinea("Negro");
+        this.setColorRelleno("Blanco");
     }
     
     public abstract double calcularArea();

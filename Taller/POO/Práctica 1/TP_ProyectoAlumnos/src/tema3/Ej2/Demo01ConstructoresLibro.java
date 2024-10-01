@@ -1,7 +1,10 @@
 /*
 Demo que crea objetos Libro invocando a los constructores definidos. 
  */
-package tema3;
+package tema3.Ej2;
+
+import tema3.Ej3.Autor;
+import tema3.Ej2.Libro;
 
 /**
  *
@@ -13,6 +16,8 @@ public class Demo01ConstructoresLibro {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Autor autor1 = new Autor("Herbert Schildt", "-", "Viena");
+        Autor autor2 = new Autor("John Horton", "-", "Budapest");
         Libro libro1= new  Libro( "Java: A Beginner's Guide",   
                                  "Mcgraw-Hill", 2014,   
                                  "Herbert Schildt", "978-0071809252", 21.72);

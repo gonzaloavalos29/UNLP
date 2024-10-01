@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tema4;
+package tema4.Ej1;
 
 public class Rectangulo extends Figura{
     private double base;
@@ -42,13 +42,9 @@ public class Rectangulo extends Figura{
     }
     
     public String toString(){
-       String aux = super.toString() + 
-                    " Base: " + getBase() +
-                    " Altura: " + getAltura();
+       String aux = "Rectangulo: " + super.toString() + 
+                    " | Base: " + getBase() +
+                    " | Altura: " + getAltura();
        return aux;
     }
-
-    
-    
-    
 }

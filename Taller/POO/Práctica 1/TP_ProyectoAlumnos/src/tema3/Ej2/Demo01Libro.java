@@ -1,7 +1,9 @@
 /*
  Programa que instancia un objeto libro e inicializa sus v.i.s enviando mensajes set#
  */
-package tema3;
+package tema3.Ej2;
+
+import tema3.Ej2.Libro;
 
 /**
  *
@@ -17,7 +19,7 @@ public class Demo01Libro {
         libro.setTitulo("Java: A Beginner's Guide");
         libro.setEditorial("Mcgraw-Hill");
         libro.setAñoEdicion(2014);
-        libro.setPrimerAutor("Herbert Schildt");
+        //libro.setPrimerAutor("Herbert Schildt");
         libro.setISBN("978-0071809252");
         libro.setPrecio(21.72);
         System.out.println(libro.toString());

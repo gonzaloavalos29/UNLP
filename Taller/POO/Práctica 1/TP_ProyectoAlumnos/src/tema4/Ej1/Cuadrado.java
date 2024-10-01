@@ -1,4 +1,4 @@
-package tema4;
+package tema4.Ej1;
 
 
 public class Cuadrado extends Figura{
@@ -8,7 +8,6 @@ public class Cuadrado extends Figura{
     public Cuadrado(double unLado, String unColorR, String unColorL){
         super(unColorR,unColorL);
         setLado(unLado);
-
     } 
     
     public double getLado(){
@@ -19,17 +18,19 @@ public class Cuadrado extends Figura{
         lado=unLado;
     }
 
+    @Override
     public double calcularArea(){
        return (getLado()* getLado());
     }
     
+    @Override
     public double calcularPerimetro(){
        return (getLado()*4);
     }
     
     public String toString(){
-       String aux = super.toString() + 
-                    " Lado: " + getLado();
+       String aux = "Cuadrado: " + super.toString() + 
+                    " | Lado: " + getLado();
        return aux;
     }
 
