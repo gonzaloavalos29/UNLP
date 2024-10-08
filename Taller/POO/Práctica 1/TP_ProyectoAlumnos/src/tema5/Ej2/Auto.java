@@ -10,20 +10,20 @@ package tema5.Ej2;
  * @author chach
  */
 public class Auto {
-    private String nombreDuenio;
+    private String nombreDueno;
     private String patente;
-
-    public Auto(String nombreDuenio, String patente) {
-        this.nombreDuenio = nombreDuenio;
-        this.patente = patente;
+    
+    public Auto(String str, String i){
+        this.nombreDueno = str;
+        this.patente = i;
+    }
+    
+    public String getNombreDueno() {
+        return nombreDueno;
     }
 
-    public String getNombreDuenio() {
-        return nombreDuenio;
-    }
-
-    public void setNombreDuenio(String nombreDuenio) {
-        this.nombreDuenio = nombreDuenio;
+    public void setNombreDueno(String nombreDueno) {
+        this.nombreDueno = nombreDueno;
     }
 
     public String getPatente() {
@@ -33,10 +33,9 @@ public class Auto {
     public void setPatente(String patente) {
         this.patente = patente;
     }
-
-    @Override
+    
     public String toString() {
-        return "Auto{" + "nombreDuenio=" + nombreDuenio + ", patente=" + patente + '}';
+        return this.nombreDueno + " " + this.patente;
     }
     
 }

@@ -12,13 +12,11 @@ package tema5.Ej4;
 public abstract class Coro {
     private String nombreCoro;
     private Director director;
-    private int cantCoristas;
     private int cantActual = 0;
 
-    public Coro(String nombreCoro, Director director, int cantCoristas) {
+    public Coro(String nombreCoro, Director director) {
         this.nombreCoro = nombreCoro;
         this.director = director;
-        this.cantCoristas = cantCoristas;
     }
 
     public String getNombreCoro() {
@@ -35,14 +33,6 @@ public abstract class Coro {
 
     public void setDirector(Director director) {
         this.director = director;
-    }
-
-    public int getCantCoristas() {
-        return cantCoristas;
-    }
-
-    public void setCantCoristas(int cantCoristas) {
-        this.cantCoristas = cantCoristas;
     }
 
     public int getCantActual() {
@@ -63,12 +53,7 @@ public abstract class Coro {
     }
     
     public abstract void agregarCorista(Corista corista);
-    public boolean estaLleno() {
-        if (this.cantActual == this.cantCoristas)
-            return true;
-        else
-            return false;
-    }
+    public abstract boolean estaLleno();
     public abstract boolean estaBienFormado();
     
 }

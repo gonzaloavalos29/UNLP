@@ -10,6 +10,7 @@ package tema5.Ej2;
  * @author chach
  */
 public class Estacionamiento {
+    
     private String nombre;
     private String direccion;
     private double horaApertura;

@@ -11,19 +11,24 @@ package tema5.Ej4;
  */
 public class CoroSemicircular extends Coro {
     private Corista[] coristas;
+    private int maxCoristas;
+    private int coristasActivos = 0;
 
-    public CoroSemicircular(String nombreCoro, Director director, int cantCoristas) {
-        super(nombreCoro, director, cantCoristas);
-        coristas = new Corista[cantCoristas];
+    public CoroSemicircular(String nombreCoro, Director director, int maxCoristas) {
+        super(nombreCoro, director);
+        this.maxCoristas = maxCoristas;
+        this.coristas = new Corista[maxCoristas];
     }
 
     @Override
     public void agregarCorista(Corista corista) {
-        if (super.getCantActual() < super.getCantCoristas()) {
-            this.coristas[super.getCantActual()] = corista;
-            super.setCantActual(super.getCantActual()+1);
+        if (this.coristasActivos < this.maxCoristas) {
+            this.coristas[this.coristasActivos] = corista;
+            this.coristasActivos++;
+        } else {
+            System.out.println("No hay mas lugar en el coro");
         }
-    } 
+    }
 
     @Override
     public boolean estaBienFormado() {
@@ -46,5 +51,10 @@ public class CoroSemicircular extends Coro {
             aux += coristas[i].toString() + "\n";
         }
         return aux;
+    }
+
+    @Override
+    public boolean estaLleno() {
+        return (this.coristasActivos == this.maxCoristas);
     }
 }

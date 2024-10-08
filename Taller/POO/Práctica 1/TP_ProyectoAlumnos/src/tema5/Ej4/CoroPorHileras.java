@@ -11,53 +11,73 @@ package tema5.Ej4;
  */
 public class CoroPorHileras extends Coro {
     private Corista[][] coristas;
-    private int cantColumna = 0;
-    private int cantFila = 0;
+    private int filas;
+    private int columnas;
+    private int totalCoristas;
+    private int coristasActivos = 0;
 
-    public CoroPorHileras(String nombreCoro, Director director, int cantCoristas) {
-        super(nombreCoro, director, cantCoristas);
-        coristas = new Corista[cantCoristas/5][5]; // las columnas serán de a 5 coristas. La cantidad total viene determinada desde la superclase, por lo tanto dividimos la cantidad total por 5 para ver la cantidad de filas
+    public CoroPorHileras(String nombreCoro, Director director, int filas, int columnas, int cantCoristas) {
+        super(nombreCoro, director);
+        this.filas = filas;
+        this.columnas = columnas;
+        this.coristas = new Corista [this.filas][this.columnas];
+        this.totalCoristas = this.filas * this.columnas;
+        for (int i = 0; i < this.filas; i++) {
+            for (int j = 0; j < this.columnas; j++) {
+                this.coristas[i][j] = null;
+            }
+        }
     }
 
     @Override
     public void agregarCorista(Corista corista) {
-        if (super.getCantActual() < super.getCantCoristas()) {
-            this.coristas[this.cantFila][this.cantColumna] = corista;
-            super.setCantActual(super.getCantActual()+1); this.cantColumna++;
-            if (this.cantColumna == 5) {
-                this.cantFila++;
-                this.cantColumna = 0;
-            }
+        if (this.coristasActivos < this.totalCoristas) {
+            this.coristas[this.coristasActivos/this.columnas][this.coristasActivos%this.columnas] = corista;
+            this.coristasActivos++;
+        } else {
+            System.out.println("No hay mas lugar en el coro");
         }
     }
 
     @Override
     public boolean estaBienFormado() {
-        boolean aux = true;
-        int i = 0, j = 0, contador = 0;
-        while (contador < super.getCantActual() && aux == true){
-            if (coristas[i][j+1].getTono() > coristas[i][j].getTono()) {
-                aux = false;
-            } else {
-                j++;
+        int fila = 0;
+        int columna = 0;
+        boolean ok = true;
+        while ((fila < this.filas-1) && (ok)) {
+            columna = 0;
+            while ((columna < this.columnas-1) && ok) {
+                if (this.coristas[fila][0].getTono() < this.coristas[fila+1][0].getTono()) {
+                    ok = false;
+                }
+                fila++;
             }
-            if (j == 5) {
-                i++;
-                j = 0;
+        }
+        return ok;
+    }
+
+    @Override
+    public boolean estaLleno() {
+        boolean ok = false;
+        if (this.coristasActivos == this.totalCoristas) {
+            ok = true;
+        }
+        return ok;
+    }
+
+    @Override
+    public String toString() {
+        String aux;
+        aux = super.toString() + "Datos de los coristas: \n";
+        for (int i = 0; i < this.filas; i++) {
+            for (int j = 0; j < this.columnas; j++) {
+                if (this.coristas[i][j] != null) {
+                    aux += this.coristas[i][j].toString() + "\n";
+                }
             }
-            contador++;
         }
         return aux;
     }
     
-    @Override
-    public String toString() {
-        String aux = super.toString();
-        for (int i = 0; i < super.getCantActual()/5; i++) {
-            for (int j = 0; j < 5; j++) {
-                aux += coristas[i].toString() + "\n";
-            }
-        }
-        return aux;
-    }
+    
 }

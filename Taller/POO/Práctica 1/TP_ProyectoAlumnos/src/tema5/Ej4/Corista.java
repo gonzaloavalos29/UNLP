@@ -12,7 +12,7 @@ package tema5.Ej4;
 public class Corista extends Persona {
     private int tono;
 
-    public Corista(int tono, String nombre, int edad, int dni) {
+    public Corista(String nombre, int dni, int edad, int tono) {
         super(nombre, edad, dni);
         this.tono = tono;
     }
