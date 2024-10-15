@@ -1,27 +1,30 @@
-PA EQU 30h
-PB EQU 31h
-CA EQU 32h
-CB EQU 33h
- 
-org 1000h
-clave  db 11011011b
-org 3000h
-ini_pio:  mov al, 0ffh
-          out CA, al
-          mov al, 0
-          out CB, AL
-          ret
- 
-org 2000h
- 
-          call ini_pio
-loop:     in al, PA
-          cmp al, clave
-          jz fin
-          xor al, clave
-          not al
-          out PB, al
-          jmp loop
-fin:      int 0
+PA EQU 30H
+PB EQU 31H
+CA EQU 32H
+CB EQU 33H
+
+ORG 1000H
+CLAVE DB 10101111B
+GANASTE DB "GANASTE"
+
+ORG 3000H
+CONFIG_PIO: MOV AL, 0
+          OUT CB, AL
+          MOV AL, 255
+          OUT CA, AL
+          RET
+
+ORG 2000H
+CALL CONFIG_PIO
+LOOP: IN AL, PA
+      XOR AL, CLAVE
+      NOT AL
+      OUT PB, AL
+      CMP AL, 11111111B
+      JNZ LOOP
+
+      MOV BX, OFFSET GANASTE
+      MOV AL, 7
+      INT 7
+INT 0
 END
-        

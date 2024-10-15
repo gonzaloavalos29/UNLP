@@ -1,57 +1,50 @@
-PA EQU 30h
-PB EQU 31h
-CA EQU 32h
-CB EQU 33h
- 
-org 1000h
-luces  db 11011011b
-msj db "Fin de Programa"
-fin_msj db ?
-msj2 db "Arquitectura de Computadoras: ACTIVADA",10
-fin_msj2 db ?
- 
-org 3400h
-ini_pio:  mov al, 0ffh
-          out CA, al
-          mov al, 0
-          out CB, AL
-          ret
- 
-org 3000h
-A:                 in al, PA
-                   cmp al, 0
-                   jnz no_estan_apagadas
-                   mov BX, offset MSJ
-                   mov al, offset fin_msj - offset MSJ
-                   int 7
-                   mov al,1
-                   jmp fin_a
-no_estan_apagadas: mov al,0
-fin_a:             ret
- 
-org 3100h
-B:  mov al, luces
-    not al
-    mov luces, al
-    out PB,al
-    ret
- 
-org 3200h
-C:       in al, PA
-         and al, 1
-         jz fin_c
-         mov BX, offset msj2
-         mov al, offset fin_msj2 - offset msj2
-         int 7
-fin_c:   ret
- 
-org 2000h
-          call ini_pio
-loop:     call A
-          cmp al, 1
-          jz fin
-          call B
-          call C
-          jmp loop
-fin:      int 0
-end
+PA EQU 30H
+PB EQU 31H
+CA EQU 32H
+CB EQU 33H
+
+ORG 1000H
+MSJ DB "Arquitectura de Computadoras: ACTIVADA"
+MSJ_FIN DB "Fin de Programa"
+FIN DB 0
+
+ORG 3000H
+A:       CMP AL, 0
+         JNZ SEGUIR
+         MOV BX, OFFSET MSJ_FIN
+         MOV AL, OFFSET FIN - OFFSET MSJ_FIN
+         INT 7
+         MOV FIN, 1
+SEGUIR:  RET
+
+ORG 3200H
+B: PUSH AX
+   NOT AL
+   OUT PB, AL
+   POP AX
+   RET
+ORG 3400H
+C:       PUSH AX
+         AND AL, 10000000B
+         JZ VOLVER
+         MOV BX, OFFSET MSJ
+         MOV AL, OFFSET MSJ_FIN - OFFSET MSJ
+         INT 7
+VOLVER:  POP AX
+         RET
+
+ORG 2000H
+MOV AL, 0FFH
+OUT CA, AL
+MOV AL, 0
+OUT CB, AL
+
+LOOP: IN AL, PA
+      CALL A
+      CMP FIN, 1
+      JZ TERMINAR
+      CALL B
+      CALL C
+      JMP LOOP
+TERMINAR: INT 0
+          END

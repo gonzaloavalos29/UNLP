@@ -1,0 +1,54 @@
+PA EQU 30H
+PB EQU 31H
+CA EQU 32H
+CB EQU 33H
+
+ORG 1000H
+STR DB "MILANESAS"
+FIN DB ?
+
+ORG 3000H
+CONF_PIO: MOV AL, 01H
+          OUT CA, AL
+          ; CONFIGURO CB
+          MOV AL, 00H
+          OUT CB, AL
+          RET
+
+; CONSULTA DE ESTADO
+ORG 3300H
+POLL: IN AL, PA
+      AND AL, 1
+      JNZ POLL
+      RET
+
+ORG 3100H
+STROBE0: IN AL, PA
+         AND AL, 0FDH
+         OUT PA, AL
+         RET
+
+ORG 3200H
+STROBE1: IN AL, PA
+         OR AL, 02H
+         OUT PA, AL
+         RET
+         
+      
+ORG 2000H
+CALL CONF_PIO
+MOV BX, OFFSET STR
+MOV CL, OFFSET FIN - OFFSET STR
+CALL STROBE0
+
+LOOP: CALL POLL
+      MOV AL, [BX]
+      OUT PB, AL
+      CALL STROBE1
+      CALL STROBE0
+      INC BX
+      DEC CL
+      JNZ LOOP
+
+INT 0
+END
