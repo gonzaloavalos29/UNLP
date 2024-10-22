@@ -1,0 +1,58 @@
+programa ejemplo
+procesos
+  proceso juntarPapeles(ES papeles: numero)
+  comenzar
+    si (HayPapelEnLaEsquina)
+      mientras HayPapelEnLaEsquina
+        tomarPapel
+        papeles:= papeles + 1
+  fin
+  proceso limpiarPerimetro
+  variables
+    papeles: numero
+  comenzar
+    repetir 10
+      juntarPapeles(papeles)
+      mover
+    juntarPapeles(papeles)
+    Informar(papeles)
+  fin
+areas
+  ciudad: AreaPC (10,10,20,20)
+robots
+  robot robot1
+  comenzar
+    limpiarPerimetro
+  fin
+  robot robot2
+  comenzar
+    derecha
+    limpiarPerimetro
+  fin
+  robot robot3
+  comenzar
+    repetir 2
+      derecha
+    limpiarPerimetro
+  fin
+  robot robot4
+  comenzar
+    repetir 3
+      derecha
+    limpiarPerimetro
+  fin
+variables
+  r1: robot1
+  r2: robot2
+  r3: robot3
+  r4: robot4
+comenzar
+  AsignarArea(r1, ciudad)
+  AsignarArea(r2, ciudad)
+  AsignarArea(r3, ciudad)
+  AsignarArea(r4, ciudad)
+  Iniciar(r1, 10,10)
+  Iniciar(r2, 10,20)
+  Iniciar(r3, 20,20)
+  Iniciar(r4, 20,10)
+fin
