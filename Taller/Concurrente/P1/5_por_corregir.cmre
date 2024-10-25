@@ -16,25 +16,25 @@ procesos
   fin
   proceso limpiarFlores(ES flores: numero)
   comenzar
-    si (PosCa = 1)
-      repetir 15
+    si (PosAv = 1)
+      repetir 14
         juntarFlores(flores)
         mover
       juntarFlores(flores)
     si (PosCa = 10)
-      repetir 19
+      repetir 29
         juntarFlores(flores)
         mover
       juntarFlores(flores)
   fin
   proceso limpiarPapeles(ES papeles: numero)
   comenzar
-    si (PosAv = 1)
-      repetir 15
+    si (PosCa = 75)
+      repetir 19
         juntarPapeles(papeles)
         mover
       juntarPapeles(papeles)
-    si (PosAv = 71)
+    si (PosAv = 75)
       repetir 29
         juntarPapeles(papeles)
         mover
