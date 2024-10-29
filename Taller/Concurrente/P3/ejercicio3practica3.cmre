@@ -1,0 +1,109 @@
+programa ejemplo
+procesos 
+  proceso verificarMax(ES rGanador:numero; E quienEs:numero; ES max:numero)
+  variables
+    cant:numero
+  comenzar
+    si (quienEs=1)
+      RecibirMensaje(cant,r1)
+      si (cant>max)
+        max:=cant
+        rGanador:=1
+    sino 
+      si (quienEs=2)
+        RecibirMensaje(cant,r2)
+        si (cant>max)
+          max:=cant
+          rGanador:=2
+      sino 
+        si (quienEs=3)
+          RecibirMensaje(cant,r3)
+          si (cant>max)
+            max:=cant
+            rGanador:=3            
+        sino
+          RecibirMensaje(cant,r4)
+          si (cant>max)
+            max:=cant
+            rGanador:=4
+  fin
+  proceso accederEsquina(E av:numero; E ca:numero; E avActual:numero; E caActual:numero; ES cant:numero)
+  variables
+    ok:boolean
+  comenzar
+    ok:=V
+    mientras (ok)
+      BloquearEsquina(av,ca)
+      Pos(av,ca)
+      si (HayFlorEnLaEsquina)
+        tomarFlor
+        cant:=cant+1
+      sino
+        ok:=F
+      Pos(avActual,caActual)
+      LiberarEsquina(av,ca)
+  fin
+areas
+  area1: AreaPC (2,2,10,10)
+  areajefe: AreaP(1,1,1,1)
+robots
+  robot robot1
+  variables
+    caActual,avActual,quienSoy,cant,avjefe,cajefe:numero
+  comenzar
+    cant:=0
+    RecibirMensaje(quienSoy,jefe)
+    RecibirMensaje(avjefe,jefe)
+    RecibirMensaje(cajefe,jefe)
+    avActual:=PosAv
+    caActual:=PosCa
+    accederEsquina(avjefe,cajefe,avActual,caActual,cant)
+    EnviarMensaje(quienSoy,jefe)
+    EnviarMensaje(cant,jefe)
+  fin
+  robot robotJefe
+  variables
+    quienEs,max,av,ca,rGanador,cant:numero
+  comenzar
+    max:=0
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)    
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+    Random(av,2,10)
+    Random(ca,2,10)  
+    EnviarMensaje(av,r1)
+    EnviarMensaje(ca,r1)
+    
+    EnviarMensaje(av,r2)
+    EnviarMensaje(ca,r2)
+    
+    EnviarMensaje(av,r3)
+    EnviarMensaje(ca,r3)
+    
+    EnviarMensaje(av,r4)
+    EnviarMensaje(ca,r4)
+    repetir 4
+      RecibirMensaje(quienEs,*)
+      verificarMax(rGanador,quienEs,max)
+     
+    Informar(rGanador)
+  fin
+variables
+  r1: robot1
+  r2: robot1
+  r3: robot1
+  r4: robot1
+  jefe:robotJefe
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area1)
+  AsignarArea(r3, area1)
+  AsignarArea(r4, area1)
+  AsignarArea(jefe, areajefe)
+  Iniciar(r1,2,2)
+  Iniciar(r2,3,2)
+  Iniciar(r3,4,2)
+  Iniciar(r4,5,2)
+  Iniciar(jefe,1,1)
+fin

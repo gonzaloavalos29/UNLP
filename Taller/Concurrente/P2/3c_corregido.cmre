@@ -1,0 +1,103 @@
+programa p2Ej2
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    si (HayFlorEnLaEsquina)
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+        flores:= flores + 1
+  fin
+  proceso juntarPapeles(ES papeles: numero)
+  comenzar
+    si (HayPapelEnLaEsquina)
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+        papeles:= papeles + 1
+  fin
+  proceso equipoA(ES papeles: numero)
+  comenzar
+    repetir 9
+      juntarPapeles(papeles)
+      mover
+    juntarPapeles(papeles)
+  fin
+  proceso equipoB(ES flores: numero)
+  comenzar
+    repetir 9
+      juntarFlores(flores)
+      mover
+    juntarFlores(flores)
+  fin
+areas
+  area1: AreaP(1,1,10,1)
+  area2: AreaP(21,1,30,1)
+  area3: AreaP(11,1,20,1)
+  area4: AreaP(31,1,40,1)
+  area5: AreaP(1,5,10,5)
+  area6: AreaP(21,5,30,5)
+  area7: AreaP(11,5,20,5)
+  area8: AreaP(31,5,40,5)
+robots
+  robot robotA
+  variables
+    papeles, flores: numero
+  comenzar
+    derecha
+    flores:= 0
+    papeles:= 0
+    si (PosCa = 1)
+      equipoA(papeles)
+      EnviarMensaje(papeles, r2)
+      Pos(PosAv+11, PosCa)
+      RecibirMensaje(papeles, r2)
+      equipoA(papeles)
+      EnviarMensaje(papeles, r2)
+    sino
+      equipoB(flores)
+      EnviarMensaje(flores, r4)
+      Pos(PosAv+11, PosCa)
+      RecibirMensaje(flores, r4)
+      equipoB(flores)
+      EnviarMensaje(flores, r4)
+  fin
+  robot robotB
+  variables
+    flores, papeles: numero
+  comenzar
+    derecha 
+    si (PosCa = 1)
+      RecibirMensaje(papeles, r1)
+      equipoA(papeles)
+      EnviarMensaje(papeles, r1)
+      RecibirMensaje(papeles, r1)
+      Pos(PosAv+11, PosCa)
+      equipoA(papeles)
+      Informar("EQUIPO A", papeles)
+    sino
+      RecibirMensaje(flores, r3)
+      equipoB(flores)
+      EnviarMensaje(flores, r3)
+      RecibirMensaje(papeles, r3)
+      Pos(PosAv+11, PosCa)
+      equipoB(flores)
+      Informar("EQUIPO B ", flores)
+  fin
+variables
+  r1: robotA
+  r2: robotB
+  r3: robotA
+  r4: robotB
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, area2)
+  AsignarArea(r2, area3)
+  AsignarArea(r2, area4)
+  AsignarArea(r3, area5)
+  AsignarArea(r3, area6)
+  AsignarArea(r4, area7)
+  AsignarArea(r4, area8)
+  Iniciar(r1,1,1)
+  Iniciar(r2,11,1)
+  Iniciar(r3,1,5)
+  Iniciar(r4,11,5)
+fin

@@ -18,46 +18,42 @@ procesos
   comenzar
     si (PosAv = 1)
       repetir 14
-        juntarFlores(flores)
         mover
-      juntarFlores(flores)
-    si (PosCa = 10)
-      repetir 29
         juntarFlores(flores)
+    si (PosAv = 70)
+      repetir 30
         mover
-      juntarFlores(flores)
+        juntarFlores(flores)
   fin
   proceso limpiarPapeles(ES papeles: numero)
   comenzar
-    si (PosCa = 75)
-      repetir 19
-        juntarPapeles(papeles)
+    si (PosCa = 1)
+      repetir 9
         mover
-      juntarPapeles(papeles)
-    si (PosAv = 75)
-      repetir 29
         juntarPapeles(papeles)
+    si (PosCa = 80)
+      repetir 20
         mover
-      juntarPapeles(papeles)
+        juntarPapeles(papeles)
   fin
   proceso posicionar
   comenzar
     si (PosAv = 15)
       Pos(1, 80)
     si (PosAv = 100)
-      Pos(71, 15)
-    si (PosCa = 10)
-      Pos(71, 7)
-    si (PosCa = 100)
-      Pos(80, 81)
+      Pos(70, 15)
+    si (PosAv = 10)
+      Pos(15, 1)
+    si (PosAv = 75)
+      Pos(80, 80)
   fin
 areas
   area1: AreaP(1,75,15,75)
   area2: AreaP(1,80,15,80)
-  area3: AreaP(75,81,75,100)
-  area4: AreaP(80,81,80,100)
-  area5: AreaP(71,10,100,10)
-  area6: AreaP(71,15,100,15)
+  area3: AreaP(75,80,75,100)
+  area4: AreaP(80,80,80,100)
+  area5: AreaP(70,10,100,10)
+  area6: AreaP(70,15,100,15)
   area7: AreaP(10,1,10,10)
   area8: AreaP(15,1,15,10)
 robots
@@ -103,7 +99,7 @@ comenzar
   AsignarArea(r4, area7)
   AsignarArea(r4, area8)
   Iniciar(r1,1,75)
-  Iniciar(r2,75,81)
-  Iniciar(r3,71,10)
+  Iniciar(r2,75,80)
+  Iniciar(r3,70,10)
   Iniciar(r4,10,1)
 fin

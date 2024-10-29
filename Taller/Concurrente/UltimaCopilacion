@@ -1,110 +1,29 @@
-{ chach 2024-10-25T07:58:59.711 }
-programa p1Ej5
+{ chach 2024-10-26T12:39:13.613 }
+programa ejemplo1
+
 procesos
-  proceso juntarFlores(ES flores: numero)
+  proceso juntarFlores
   comenzar
-    si (HayFlorEnLaEsquina)
-      mientras (HayFlorEnLaEsquina)
-        tomarFlor
-        flores:= flores + 1
+    mientras HayFlorEnLaEsquina
+      tomarFlor
   fin
-  proceso juntarPapeles(ES papeles: numero)
-  comenzar
-    si (HayPapelEnLaEsquina)
-      mientras (HayPapelEnLaEsquina)
-        tomarPapel
-        papeles:= papeles + 1
-  fin
-  proceso limpiarFlores(ES flores: numero)
-  comenzar
-    si (PosAv = 1)
-      repetir 14
-        juntarFlores(flores)
-        mover
-      juntarFlores(flores)
-    si (PosCa = 10)
-      repetir 29
-        juntarFlores(flores)
-        mover
-      juntarFlores(flores)
-  fin
-  proceso limpiarPapeles(ES papeles: numero)
-  comenzar
-    si (PosCa = 75)
-      repetir 19
-        juntarPapeles(papeles)
-        mover
-      juntarPapeles(papeles)
-    si (PosAv = 75)
-      repetir 29
-        juntarPapeles(papeles)
-        mover
-      juntarPapeles(papeles)
-  fin
-  proceso posicionar
-  comenzar
-    si (PosAv = 15)
-      Pos(1, 80)
-    si (PosAv = 100)
-      Pos(71, 15)
-    si (PosCa = 10)
-      Pos(71, 7)
-    si (PosCa = 100)
-      Pos(80, 81)
-  fin
+  
 areas
-  area1: AreaP(1,75,15,75)
-  area2: AreaP(1,80,15,80)
-  area3: AreaP(75,81,75,100)
-  area4: AreaP(80,81,80,100)
-  area5: AreaP(71,10,100,10)
-  area6: AreaP(71,15,100,15)
-  area7: AreaP(10,1,10,10)
-  area8: AreaP(15,1,15,10)
+  avenidas : AreaPC(1,1,2,11)
+ 
 robots
-  robot robot1
-  variables
-    flores: numero
+  robot florero
   comenzar
-    flores:= 0
-    derecha
-    limpiarFlores(flores)
-    posicionar
-    limpiarFlores(flores)
-    repetir flores
-      depositarFlor
+    repetir 10
+      juntarFlores
+      mover
   fin
-  robot robot2
-  variables
-    papeles: numero
-    avIni, caIni: numero
-  comenzar
-    avIni:= PosAv
-    caIni:= PosCa
-    papeles:= 0
-    limpiarPapeles(papeles)
-    posicionar
-    limpiarPapeles(papeles)
-    Pos(avIni,caIni)
-    repetir papeles
-      depositarPapel
-  fin
+  
 variables
-  r1: robot1
-  r2: robot2
-  r3: robot1
-  r4: robot2
+  robot1, robot2 : florero
 comenzar
-  AsignarArea(r1, area1)
-  AsignarArea(r1, area2)
-  AsignarArea(r2, area3)
-  AsignarArea(r2, area4)
-  AsignarArea(r3, area5)
-  AsignarArea(r3, area6)
-  AsignarArea(r4, area7)
-  AsignarArea(r4, area8)
-  Iniciar(r1,1,75)
-  Iniciar(r2,75,81)
-  Iniciar(r3,71,10)
-  Iniciar(r4,10,1)
+  AsignarArea(robot1,avenidas)
+  AsignarArea(robot2,avenidas)
+  Iniciar(robot1,1,1)
+  Iniciar(robot2,2,1)
 fin
