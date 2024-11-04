@@ -2,63 +2,61 @@ programa ej1P4
 procesos
   proceso juntarFlores(ES flores: numero)
   comenzar
-    mientras HayFlorEnLaEsquina
-      tomarFlor
-      flores:= flores + 1
+    si (HayFlorEnLaEsquina)
+      mientras HayFlorEnLaEsquina
+        tomarFlor
+        flores:= flores + 1
   fin
   proceso recorrer(ES flores: numero; ES ok: boolean)
   comenzar
     mientras (ok)
-      si ((PosAv < 100) & (flores > 0))
+      si ((PosCa < 100) & (flores > 0))
         depositarFlor
         flores:= flores - 1
         mover
       sino
-        si (flores > 0)
-          depositarFlor
-          flores:= flores - 1
         ok:= F
   fin
 areas
-  area1: AreaP(1, 1, 1, 1)
-  area1a: AreaPC(1, 2, 1, 2)
-  area1b: AreaP(1, 3, 1, 6)
-  area2: AreaP(2, 1, 2, 1)
-  area2a: AreaPC(2, 2, 2, 2)
-  area2b: AreaP(2, 3, 2, 6)
-  area3: AreaP(3, 1, 3, 1)
-  area3a: AreaPC(3, 2, 3, 2)
-  area3b: AreaP(3, 3, 3, 6)
-  areaS: AreaP(100,100,100,100)
+  areaC: AreaC(1,1,100,100)
 robots
   robot cliente
   variables
     flores, cant: numero
     av, ca: numero
+    avIni, caIni: numero
     ok: boolean
   comenzar
-    Random(cant, 1, 4)
-    av:= PosAv
-    ca:= PosCa+1
-    EnviarMensaje(av, rS)
-    EnviarMensaje(ca, rS)
-    EnviarMensaje(cant, rS)
-    RecibirMensaje(ok, rS)
-    Pos(av, ca)
+    avIni:= PosAv
+    caIni:= PosCa
     juntarFlores(flores)
-    recorrer(flores, ok)
+    mientras (PosCa < 100)
+      Random(cant, 1, 4)
+      av:= PosAv
+      ca:= PosCa+1
+      EnviarMensaje(av, rS)
+      EnviarMensaje(ca, rS)
+      EnviarMensaje(cant, rS)
+      RecibirMensaje(ok, rS)
+      Pos(av, ca)
+      juntarFlores(flores)
+      recorrer(flores, ok)
+    EnviarMensaje(0, rS)
   fin
   robot servidor
   variables
     av, ca: numero
     avIni, caIni, flores: numero
-    cant: numero
+    cant, contador: numero
   comenzar
     avIni:= PosAv
     caIni:= PosCa
+    contador:= 0
     juntarFlores(flores)
-    repetir 3
+    mientras (contador < 3)
       RecibirMensaje(av, *)
+      si (av = 0)
+        contador:= contador + 1
       si (av = 1)
         RecibirMensaje(ca, r1)
         RecibirMensaje(cant, r1)
@@ -92,19 +90,10 @@ variables
   r3: cliente
   rS: servidor
 comenzar
-  AsignarArea(r1, area1)
-  AsignarArea(r1, area1a)
-  AsignarArea(r1, area1b)
-  AsignarArea(r2, area2)
-  AsignarArea(r2, area2a)
-  AsignarArea(r2, area2b)
-  AsignarArea(r3, area3)
-  AsignarArea(r3, area3a)
-  AsignarArea(r3, area3b)
-  AsignarArea(rS, areaS)
-  AsignarArea(rS, area1a)
-  AsignarArea(rS, area2a)
-  AsignarArea(rS, area3a)
+  AsignarArea(r1, areaC)
+  AsignarArea(r2, areaC)
+  AsignarArea(r3, areaC)
+  AsignarArea(rS, areaC)
   Iniciar(r1, 1, 1)
   Iniciar(r2, 2, 1)
   Iniciar(r3, 3, 1)

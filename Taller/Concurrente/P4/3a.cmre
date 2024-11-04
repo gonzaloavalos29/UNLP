@@ -5,9 +5,9 @@ procesos
     mientras HayPapelEnLaEsquina
       tomarPapel
   fin
-  proceso recorrerEtapa
+  proceso recorrerEtapa(E cant: numero)
   comenzar
-    repetir 5
+    repetir cant
       juntarPapeles
       mover
   fin
@@ -26,7 +26,7 @@ robots
     ok:= V
     RecibirMensaje(id, rC)
     mientras (ok)
-      recorrerEtapa
+      recorrerEtapa(5)
       si (id = 1)
         EnviarMensaje(V, r2)
         EnviarMensaje(V, r3)
@@ -44,9 +44,7 @@ robots
         RecibirMensaje(ok, r2)
       si (PosCa = 96)
         ok:= F
-        repetir 4
-          juntarPapeles
-          mover
+        recorrerEtapa(4)
         juntarPapeles
   fin
   robot coordinador

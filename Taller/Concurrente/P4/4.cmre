@@ -43,8 +43,8 @@ procesos
   fin
   proceso finalizar
   comenzar
-    EnviarMensaje(F, r1)
-    EnviarMensaje(F, r2)
+    EnviarMensaje(4, r1)
+    EnviarMensaje(4, r2)
   fin
 areas
   cuadrante: AreaPC(2,2,100,100)
@@ -55,24 +55,21 @@ robots
   robot trabajador
   variables
     id, av, ca, tarea: numero
-    ok: boolean
   comenzar
-    ok:= V
     RecibirMensaje(id, rJ)
-    mientras (ok)
-      RecibirMensaje(ok, rJ)
-      si (ok = V)
-        RecibirMensaje(tarea, rJ)
-        RecibirMensaje(av, rJ)
-        RecibirMensaje(ca, rJ)
-        si (tarea = 1)
-          juntarFlores(av, ca)
+    RecibirMensaje(tarea, rJ)
+    mientras (tarea <> 4)
+      RecibirMensaje(av, rJ)
+      RecibirMensaje(ca, rJ)
+      si (tarea = 1)
+        juntarFlores(av, ca)
+      sino
+        si (tarea = 2)
+          juntarPapeles(av, ca)
         sino
-          si (tarea = 2)
-            juntarPapeles(av, ca)
-          sino
-            vaciarBolsa(av, ca)
-        EnviarMensaje(V, rJ)
+          vaciarBolsa(av, ca)
+      EnviarMensaje(V, rJ)
+      RecibirMensaje(tarea, rJ)
   fin
   robot jefe
   variables
@@ -87,13 +84,11 @@ robots
       Random(avAle, 2, 100)
       Random(caAle, 2, 100)
       si (r = 1)
-        EnviarMensaje(V, r1)
         EnviarMensaje(tarea, r1)
         EnviarMensaje(avAle, r1)
         EnviarMensaje(caAle, r1)
         RecibirMensaje(listo, r1)
       sino
-        EnviarMensaje(V, r2)
         EnviarMensaje(tarea, r2)
         EnviarMensaje(avAle, r2)
         EnviarMensaje(caAle, r2)
