@@ -40,16 +40,16 @@ robots
     Random(av, 10, 13)
     Random(ca, 10, 13)
     esconder(av, ca)
-    EnviarMensaje(1, r2)
-    EnviarMensaje(2, r3)
-    EnviarMensaje(3, r4)
+    EnviarMensaje(1, r1)
+    EnviarMensaje(2, r2)
+    EnviarMensaje(3, r3)
     RecibirMensaje(id, *)
     si (id = 1)
-      Informar("gana ", 2)
+      Informar("gana ", 1)
     si (id = 2)
-      Informar("gana ", 3)
+      Informar("gana ", 2)
     si (id = 3)
-      Informar("gana ", 4)
+      Informar("gana ", 3)
   fin
   robot buscador
   variables
@@ -59,7 +59,7 @@ robots
     ok:= V
     seguir:= V
     gane:= F
-    RecibirMensaje(id, r1)
+    RecibirMensaje(id, r4)
     mientras (seguir)
       Random(av, 10, 13)
       Random(ca, 10, 13)
@@ -69,28 +69,28 @@ robots
         seguir:= F
       si (id = 1)
         si (ok = F)
+          EnviarMensaje(F, r2)
           EnviarMensaje(F, r3)
-          EnviarMensaje(F, r4)
         sino
+          EnviarMensaje(V, r2)
           EnviarMensaje(V, r3)
-          EnviarMensaje(V, r4)
-        RecibirMensaje(ok, r3)
+        RecibirMensaje(ok, r2)
         si (ok = F)
           seguir:= F
-        RecibirMensaje(ok, r4)
+        RecibirMensaje(ok, r3)
         si (ok = F)
           seguir:= F
       si (id = 2)
         si (ok = F)
-          EnviarMensaje(F, r2)
-          EnviarMensaje(F, r4)
+          EnviarMensaje(F, r1)
+          EnviarMensaje(F, r3)
         sino
-          EnviarMensaje(V, r2)
-          EnviarMensaje(V, r4)
-        RecibirMensaje(ok, r2)
+          EnviarMensaje(V, r1)
+          EnviarMensaje(V, r3)
+        RecibirMensaje(ok, r1)
         si (ok = F)
           seguir:= F
-        RecibirMensaje(ok, r4)
+        RecibirMensaje(ok, r3)
         si (ok = F)
           seguir:= F
       si (id = 3)
@@ -98,20 +98,20 @@ robots
           EnviarMensaje(F, r2)
           EnviarMensaje(F, r3)
         sino
+          EnviarMensaje(V, r1)
           EnviarMensaje(V, r2)
-          EnviarMensaje(V, r3)
+        RecibirMensaje(ok, r1)
+        si (ok = F)
+          seguir:= F
         RecibirMensaje(ok, r2)
         si (ok = F)
           seguir:= F
-        RecibirMensaje(ok, r3)
-        si (ok = F)
-          seguir:= F
     si (gane)
-      EnviarMensaje(id, r1)
+      EnviarMensaje(id, r4)
   fin
 variables
-  r1: escondedor
-  r2, r3, r4: buscador
+  r1, r2, r3: buscador
+  r4: escondedor
 comenzar
   AsignarArea(r1, areaE)
   AsignarArea(r2, areaE)
