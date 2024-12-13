@@ -39,10 +39,11 @@ LAZO:
                 LD      $a0, 0($sp)
                 DADDI   $sp, $sp, 24
                 JR      $ra
+                
 DIFERENCIA:
                 SLT     $v0, $a1, $a2
                 BNEZ    $v0, menor
                 DSUB    $v0, $a1, $a2
                 J       VOLVER
-MENOR:  DSUB    $v0, $a2, $a1
-VOLVER: JR      $ra
+MENOR:          DSUB    $v0, $a2, $a1
+VOLVER:         JR      $ra
