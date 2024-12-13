@@ -1,9 +1,9 @@
 .data
 coorX:      .byte 24 ; Coordenada X
 coorY:      .byte 24 ; Coordenada Y
-color:      .byte 0, 255, 255, 0 ; Maximo rojo + maximo azul = magenta
-CONTROL:    .word 0x10000
-DATA:       .word 0x10008
+color:      .byte 255, 0, 255, 0 ; Maximo rojo + maximo azul = magenta
+CONTROL:    .word32 0x10000
+DATA:       .word32 0x10008
 
 .code
 LWU         $s0, CONTROL($0)    ; $s0 = dir de CONTROL

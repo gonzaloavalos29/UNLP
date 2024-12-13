@@ -9,7 +9,7 @@ LWU         $s1, DATA($0)           ; $s1 = DATA
 
 ; Pará crack, leeme un caracter
 DADDI   $t1, $0, 9
-SD      $t1, 0($s0)         ; CONTROL = 9     
+SD      $t1, 0($s0)         ; CONTROL = 9 (LEO CARACTER)
 
 ; "Presiona una tecla". La CPU guarda el caracter en DATA
 LBU     $t1, 0($s1)         ; Tomo caracter en $t1
@@ -25,5 +25,5 @@ SD      $s3, 0($s1)
 
 ; Imprimimos caracter
 DADDI   $t1, $0, 4
-SD      $t1, 0($s0)         ; CONTROL = 4
+SD      $t1, 0($s0)         ; CONTROL = 4 (IMPRIMIR)
 FIN: HALT
