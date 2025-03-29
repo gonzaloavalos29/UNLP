@@ -1,0 +1,83 @@
+programa ej2P4
+procesos
+  proceso depositar(E av: numero; E ca: numero; ES papeles: numero)
+  variables
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    BloquearEsquina(av, ca)
+    Pos(av, ca)
+    repetir papeles
+      depositarPapel
+    Pos(avIni, caIni)
+    LiberarEsquina(av, ca)
+  fin
+  proceso juntarPapeles(ES papeles: numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      papeles:= papeles + 1
+      si (papeles = 5)
+        depositar(50, 50, papeles)
+        papeles:= 0
+  fin
+  proceso recorrerAvenida(ES papeles: numero)
+  comenzar
+    papeles:= 0
+    repetir 99
+      juntarPapeles(papeles)
+      mover
+    juntarPapeles(papeles)
+  fin
+  proceso buscarPapeles
+  variables
+    avIni, caIni, cantAle, papeles: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    papeles:= 0
+    Random(cantAle, 2, 5)
+    BloquearEsquina(50, 50)
+    Pos(50, 50)
+    si (HayPapelEnLaEsquina)
+      repetir cantAle
+        si (HayPapelEnLaEsquina)
+          tomarPapel
+          papeles:= papeles + 1
+    Pos(avIni, caIni)
+    LiberarEsquina(50, 50)
+    repetir papeles
+      depositarPapel
+  fin
+areas
+  area1: AreaC(1,1,100,100)
+robots
+  robot productor
+  variables
+    papeles: numero
+  comenzar
+    recorrerAvenida(papeles)
+  fin
+  robot consumidor
+  variables
+    papeles: numero
+    cantAle: numero
+  comenzar
+    buscarPapeles
+  fin
+variables
+  r1: productor
+  r2: productor
+  r3: consumidor
+  r4: consumidor
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area1)
+  AsignarArea(r3, area1)
+  AsignarArea(r4, area1)
+  Iniciar(r1, 5, 1)
+  Iniciar(r2, 10,1)
+  Iniciar(r3, 11,1)
+  Iniciar(r4, 12,1)
+fin

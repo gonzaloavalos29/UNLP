@@ -1,0 +1,100 @@
+programa ej3p5
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores + 1
+  fin
+  proceso depositar(E av: numero; E ca: numero; ES flores: numero)
+  variables
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    BloquearEsquina(av, ca)
+    Pos(av, ca)
+    repetir flores
+      depositarFlor
+      flores:= flores - 1
+    Pos(avIni, caIni)
+    LiberarEsquina(av, ca)
+  fin
+  proceso recolectarFlores(ES flores: numero)
+  comenzar
+    mientras (PosAv < 91)
+      repetir 15
+        si (flores >= 10)
+          depositar(10, 10, flores)
+          EnviarMensaje(V, rC)
+          juntarFlores(flores)
+          mover
+        sino
+          juntarFlores(flores)
+          mover
+      mientras (HayFlorEnLaBolsa)
+        depositar(10, 10, flores)
+    repetir 9
+      juntarFlores(flores)
+      mover
+    juntarFlores(flores)
+    si (flores >= 10)
+      depositar(10, 10, flores)
+      EnviarMensaje(V, rC)
+    flores:= 0
+    EnviarMensaje(F, rC)
+  fin
+  proceso buscarFlores(ES flores: numero; E av: numero; E ca: numero)
+  variables
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    BloquearEsquina(av, ca)
+    Pos(av, ca)
+    juntarFlores(flores)
+    Pos(avIni, caIni)
+    LiberarEsquina(av, ca)
+  fin
+areas
+  area1: AreaP(1,3,100,3)
+  area2: AreaP(1,4,100,4)
+  area3: AreaP(1,5,1,5)
+  areaC: AreaP(10,10,10,10)
+robots
+  robot recolector
+  variables
+    flores: numero
+  comenzar
+    flores:= 0
+    derecha
+    recolectarFlores(flores)
+  fin
+  robot cosechador
+  variables
+    ok: boolean
+    flores, contador: numero
+  comenzar
+    flores:= 0
+    contador:= 0
+    mientras (contador < 2)
+      RecibirMensaje(ok, *)
+      si (ok = F)
+        contador:= contador + 1
+      buscarFlores(flores, 10, 10)
+    Informar(flores)
+  fin
+variables
+  r1, r2: recolector
+  rC: cosechador
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area2)
+  AsignarArea(rC, area3)
+  AsignarArea(r1, areaC)
+  AsignarArea(r2, areaC)
+  AsignarArea(rC, areaC)
+  Iniciar(r1, 1,3)
+  Iniciar(r2, 1,4)
+  Iniciar(rC, 1,5)
+fin
