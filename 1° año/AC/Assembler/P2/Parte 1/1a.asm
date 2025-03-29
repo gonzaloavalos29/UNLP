@@ -1,0 +1,13 @@
+PB EQU 31H
+CB EQU 33H
+
+ORG 1000H ; memoria de datos
+patron  db  0C3H ; 1100 0011
+ORG 2000H
+MOV AL, 0
+OUT CB, AL
+MOV AL, PATRON
+OUT PB, AL
+INT 0
+END
+
