@@ -1,0 +1,83 @@
+programa ej3p3
+procesos
+  proceso moverFlor(ES ok: boolean)
+  variables
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    BloquearEsquina(10, 10)
+    Pos(10, 10)
+    si (HayFlorEnLaEsquina)
+      tomarFlor
+    sino
+      ok:= F
+    BloquearEsquina(11, 11)
+    Pos(11, 11)
+    LiberarEsquina(10, 10)
+    si (HayFlorEnLaBolsa)
+      depositarFlor
+    Pos(avIni, caIni)
+    LiberarEsquina(11, 11)
+  fin
+areas
+  area1: AreaP(9,9,9,9)
+  area2: AreaP(9,10,9,10)
+  area3: AreaP(9,11,9,11)
+  area4: AreaP(9,12,9,12)
+  area5: AreaP(1,1,1,1)
+  areaPC: AreaPC(10,10,10,10)
+  areaC: AreaC(11,11,11,11)
+robots
+  robot juntador
+  variables
+    id: numero
+    ok: boolean
+  comenzar
+    ok:= V
+    RecibirMensaje(id, rC)
+    mientras (ok)
+      moverFlor(ok)
+    EnviarMensaje(id, rC)
+  fin
+  robot coordinador
+  variables
+    id: numero
+    ultimoRobot: numero
+  comenzar
+    EnviarMensaje(1, r1)
+    EnviarMensaje(2, r2)
+    EnviarMensaje(3, r3)
+    EnviarMensaje(4, r4)
+    repetir 4
+      RecibirMensaje(id, *)
+      ultimoRobot:= id
+    Informar("Ultimo ", ultimoRobot)
+  fin
+variables
+  r1: juntador
+  r2: juntador
+  r3: juntador
+  r4: juntador
+  rC: coordinador
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, areaPC)
+  AsignarArea(r1, areaC)
+  AsignarArea(r2, area2)
+  AsignarArea(r2, areaPC)
+  AsignarArea(r2, areaC)
+  AsignarArea(r3, area3)
+  AsignarArea(r3, areaPC)
+  AsignarArea(r3, areaC)
+  AsignarArea(r4, area4)
+  AsignarArea(r4, areaPC)
+  AsignarArea(r4, areaC)
+  AsignarArea(rC, area5)
+  AsignarArea(rC, areaC)
+  Iniciar(rC, 1,1)
+  Iniciar(r1, 9,9)
+  Iniciar(r2, 9,10)
+  Iniciar(r3, 9,11)
+  Iniciar(r4, 9,12)
+fin

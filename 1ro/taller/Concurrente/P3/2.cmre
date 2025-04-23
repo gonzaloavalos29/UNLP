@@ -1,0 +1,86 @@
+programa ej2P3
+procesos
+  proceso realizarEscalera(E direcciones: numero)
+  variables
+    tamanio: numero
+  comenzar
+    tamanio:= 5
+    repetir 5
+      repetir tamanio
+        mover
+      repetir direcciones
+        derecha
+      repetir tamanio
+        mover
+      repetir direcciones+2
+        derecha
+      tamanio:= tamanio - 1
+  fin
+  proceso realizarEscaleraInversa(E direcciones: numero)
+  variables
+    tamanio: numero
+  comenzar
+    tamanio:= 2
+    repetir direcciones
+      derecha
+    mover
+    si (PosAv = 15)
+      repetir 4
+        repetir tamanio
+          mover
+        derecha
+        repetir tamanio
+          mover
+        repetir 3
+          derecha
+        tamanio:= tamanio + 1
+    sino
+      repetir 4
+        repetir tamanio
+          mover
+        repetir 3
+          derecha
+        repetir tamanio
+          mover
+        derecha
+        tamanio:= tamanio + 1
+  fin
+areas
+  ciudad: AreaPC (1,1,31,30)
+robots
+  robot robot1
+  variables
+    id: numero
+  comenzar
+    RecibirMensaje(id, rJefe)
+    si (PosAv = 1)
+      realizarEscalera(1)
+      realizarEscaleraInversa(3)
+    si (PosAv = 31)
+      realizarEscalera(3)
+      realizarEscaleraInversa(1)
+    EnviarMensaje(id, rJefe)
+  fin
+  robot jefe
+  variables
+    id, ganador: numero
+  comenzar
+    EnviarMensaje(1, r1)
+    EnviarMensaje(2, r2)
+    RecibirMensaje(id, *)
+    ganador:= id
+    RecibirMensaje(id, *)
+    Informar("Ganador ", ganador)
+  fin
+variables
+  r1: robot1
+  r2: robot1
+  rJefe: jefe
+comenzar
+  AsignarArea(r1, ciudad)
+  AsignarArea(r2, ciudad)
+  AsignarArea(rJefe, ciudad)
+  Iniciar(r1, 1,1)
+  Iniciar(r2, 31, 1)
+  Iniciar(rJefe, 15, 1)
+fin

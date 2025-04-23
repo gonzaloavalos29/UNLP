@@ -1,0 +1,43 @@
+Dado:
+y = -15.153.844,42 + 260.857(overall)
+
+overall	potential	skill_moves	value_eur
+93	93	4	67500000
+92	92	5	46000000
+91	93	1	75000000
+91	91	4	80000000
+91	91	5	90000000
+91	91	4	87000000
+90	95	5	105500000
+90	93	1	69500000
+90	91	2	75500000
+90	91	1	62500000
+90	90	4	78000000
+90	90	4	78000000
+89	90	1	56000000
+89	89	4	53000000
+89	89	3	24500000
+89	89	4	53000000
+89	89	1	29000000
+89	89	2	59500000
+88	91	1	53500000
+
+
+Realizar un programa en python que calcule y construya el algoritmo con descenso del gradiente.
+
+ i) Usando el método de descenso por gradiente. ¿Son los valores obtenidos iguales a los
+ conseguidos mediante la resolución del sistema de ecuaciones normales? Muestra los
+ resultados obtenidos junto con las últimas iteraciones del algoritmo. Indica los valores de los
+ parámetros utilizados (como tasa de aprendizaje y número de iteraciones).
+ ii) Da una interpretación del criterio de corte utilizado en el algoritmo del gradiente. Explica
+ si presenta alguna falla. Si no es una buena condición de corte, ¿puedes sugerir un criterio
+ alternativo más eficaz?
+ Parte 3: Comportamiento del método de descenso por gradiente
+ iii) Convergencia del método de descenso por gradiente. Explicar si el método siempre
+ converge al mínimo de la función. En caso contrario, proporciona un contraejemplo para
+ ilustrar este comportamiento.
+
+Graficar
+
+def rosenbrock(x):
+    return (1 - x[0])**2 + 100 * (x[1] - x[0]**2)**2

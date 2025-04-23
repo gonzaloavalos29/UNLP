@@ -1,0 +1,38 @@
+# Importar bibliotecas necesarias para el análisis
+import numpy as np
+import statsmodels.api as sm
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Definir las variables
+X = df['overall']
+y = df['value_eur']
+
+# Agregar una constante a la variable independiente
+X = sm.add_constant(X)
+
+# Ajustar el modelo de regresión lineal
+model = sm.OLS(y, X).fit()
+
+# Obtener los coeficientes
+B0, B1 = model.params
+
+# Calcular el coeficiente de determinación
+r_squared = model.rsquared
+
+# Calcular la correlación
+correlation = np.corrcoef(df['overall'], df['value_eur'])[0, 1]
+
+# Resultados
+print(f"Coeficiente de regresión B0 (intercepto): {B0}")
+print(f"Coeficiente de regresión B1 (pendiente): {B1}")
+print(f"Coeficiente de determinación R²: {r_squared}")
+print(f"Correlación entre overall y value_eur: {correlation}")
+
+# Graficar los datos y la línea de regresión
+plt.figure(figsize=(10, 6))
+sns.regplot(x='overall', y='value_eur', data=df, line_kws={"color": "red"})
+plt.title('Regresión lineal entre Overall y Value EUR')
+plt.xlabel('Overall')
+plt.ylabel('Value EUR')
+plt.show()

@@ -1,0 +1,110 @@
+programa AvalosGonzaloMatias
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores + 1
+  fin
+  proceso limpiarEsquina(ES flores: numero; E av: numero; E ca: numero)
+  variables
+    avIni, caIni: numero
+    ok: boolean
+  comenzar
+    ok:= V
+    avIni:= PosAv
+    caIni:= PosCa
+    mientras (ok)
+      BloquearEsquina(av, ca)
+      Pos(av, ca)
+      si (HayFlorEnLaEsquina)
+        tomarFlor
+        flores:= flores + 1
+      sino
+        ok:= F
+      Pos(avIni, caIni)
+      LiberarEsquina(av, ca)
+  fin
+  proceso depositarFlores(ES flores: numero; E av: numero; E ca: numero)
+  variables
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    mientras (flores > 0)
+      BloquearEsquina(av, ca)
+      Pos(av, ca)
+      depositarFlor
+      flores:= flores - 1
+      Pos(avIni, caIni)
+      LiberarEsquina(av, ca)
+  fin
+areas
+  area1: AreaP(1,1,1,1)
+  area2: AreaP(2,1,2,1)
+  area3: AreaP(3,1,3,1)
+  area4: AreaP(5,1,5,1)
+  areaPC: AreaPC(10,10,30,30)
+  areaC: AreaC(5,5,5,5)
+robots
+  robot cliente
+  variables
+    av, ca, id, intentos, flores: numero
+    ok: boolean
+  comenzar
+    id:= PosAv
+    flores:= 0
+    Random(intentos, 2, 5)
+    repetir intentos
+      EnviarMensaje(id, r4)
+      RecibirMensaje(av, r4)
+      RecibirMensaje(ca, r4)
+      limpiarEsquina(flores, av, ca)
+      depositarFlores(flores, 5, 5)
+    EnviarMensaje(0,r4)
+  fin
+  robot servidor
+  variables
+    contador, id, av, ca, flores: numero
+  comenzar
+    contador:= 0
+    flores:= 0
+    mientras (contador < 3)
+      RecibirMensaje(id, *)
+      Random(av, 10, 30)
+      Random(ca, 10, 30)
+      si (id = 0)
+        contador:= contador + 1
+      si (id = 1)
+        EnviarMensaje(av, r1)
+        EnviarMensaje(ca, r1)
+      si (id = 2)
+        EnviarMensaje(av, r2)
+        EnviarMensaje(ca, r2)
+      si (id = 3)
+        EnviarMensaje(av, r3)
+        EnviarMensaje(ca, r3)
+    Pos(5,5)
+    juntarFlores(flores)
+    Informar(flores)
+  fin
+variables
+  r1, r2, r3: cliente
+  r4: servidor
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area2)
+  AsignarArea(r3, area3)
+  AsignarArea(r4, area4)
+  AsignarArea(r1, areaC)
+  AsignarArea(r2, areaC)
+  AsignarArea(r3, areaC)
+  AsignarArea(r4, areaC)
+  AsignarArea(r1, areaPC)
+  AsignarArea(r2, areaPC)
+  AsignarArea(r3, areaPC)
+  Iniciar(r1,1,1)
+  Iniciar(r2,2,1)
+  Iniciar(r3,3,1)
+  Iniciar(r4,5,1)
+fin

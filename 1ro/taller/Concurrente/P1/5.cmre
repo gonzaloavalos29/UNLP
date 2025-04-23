@@ -1,0 +1,118 @@
+{Bienvenidos al entorno CMRE.
+Lo siguiente es un código de ejemplo que implementa un
+proceso que recibe un número de avenida como parámetro,
+se posiciona en esa avenida y la recorre.}
+
+programa p1Ej5
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    si (HayFlorEnLaEsquina)
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+        flores:= flores + 1
+  fin
+  proceso juntarPapeles(ES papeles: numero)
+  comenzar
+    si (HayPapelEnLaEsquina)
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+        papeles:= papeles + 1
+  fin
+  proceso limpiarFlores(ES flores: numero; E cantEsq: numero)
+  comenzar
+    repetir cantEsq-1
+      juntarFlores(flores)
+      mover
+    juntarFlores(flores)
+  fin
+  proceso limpiarPapeles(ES papeles: numero; E cantEsq: numero)
+  comenzar
+    repetir cantEsq-1
+      juntarPapeles(papeles)
+      mover
+    juntarPapeles(papeles)
+  fin
+areas
+  area1: AreaP(1,75,15,75)
+  area2: AreaP(1,80,15,80)
+  area3: AreaP(75,81,75,100)
+  area4: AreaP(80,81,80,100)
+  area5: AreaP(71,10,100,10)
+  area6: AreaP(71,15,100,15)
+  area7: AreaP(10,1,10,10)
+  area8: AreaP(15,1,15,10)
+robots
+  robot robot1
+  variables
+    flores: numero
+  comenzar
+    flores:= 0
+    derecha
+    limpiarFlores(flores, 15)
+    Pos(1,80)
+    limpiarFlores(flores, 15)
+    repetir flores
+      depositarFlor
+  fin
+  robot robot2
+  variables
+    papeles: numero
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    papeles:= 0
+    limpiarPapeles(papeles, 20)
+    Pos(80, 81)
+    limpiarPapeles(papeles, 20)
+    Pos(avIni,caIni)
+    repetir papeles
+      depositarPapel
+  fin
+  robot robot3
+  variables
+    flores: numero
+  comenzar
+    flores:= 0
+    derecha
+    limpiarFlores(flores, 30)
+    Pos(71,15)
+    limpiarFlores(flores, 30)
+    repetir flores
+      depositarFlor
+  fin
+  robot robot4
+  variables
+    papeles: numero
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    papeles:= 0
+    limpiarPapeles(papeles, 10)
+    Pos(15, 1)
+    limpiarPapeles(papeles, 10)
+    Pos(avIni,caIni)
+    repetir papeles
+      depositarPapel
+  fin
+variables
+  r1: robot1
+  r2: robot2
+  r3: robot3
+  r4: robot4
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, area2)
+  AsignarArea(r2, area3)
+  AsignarArea(r2, area4)
+  AsignarArea(r3, area5)
+  AsignarArea(r3, area6)
+  AsignarArea(r4, area7)
+  AsignarArea(r4, area8)
+  Iniciar(r1,1,75)
+  Iniciar(r2,75,81)
+  Iniciar(r3,71,10)
+  Iniciar(r4,10,1)
+fin

@@ -1,0 +1,65 @@
+EOI EQU 20H
+IMR EQU 21H
+INT1 EQU 25H
+ID_TIMER EQU 15
+CONT EQU 10H
+COMP EQU 11H
+PA EQU 30H
+PB EQU 31H
+CA EQU 32H
+CB EQU 33H
+
+ORG 60
+DW RUT_TIMER
+
+ORG 1000H
+ESTADO DB ?
+
+ORG 3000H
+LUCES12: MOV BX, SP
+         ADD BX, 2
+         MOV BX, [BX]
+         MOV AL, [BX]
+         AND AL, 80H
+         JZ SALIR
+         MOV AL, 0FFH ; PRENDER LUCES
+         OUT PB, AL
+         CLI
+         MOV AL, 0FDH ; 1111 1101
+         OUT IMR, AL
+         MOV AL, ID_TIMER
+         OUT INT1, AL
+         MOV AL, 0
+         OUT CONT, AL
+         MOV AL, 12
+         OUT COMP, AL
+         STI
+SALIR:   RET
+
+ORG 3200H
+CONF_PIO: PUSH AX
+          MOV AL, 0FFH
+          OUT CA, AL
+          MOV AL, 0
+          OUT CB, AL
+          POP AX
+          RET
+ORG 3400H
+RUT_TIMER: MOV AL, 0 ; APAGAR LUCES
+           OUT PB, AL
+           MOV AL, 0FFH
+           OUT IMR, AL
+           MOV AL, EOI
+           OUT EOI, AL
+           IRET
+
+ORG 2000H
+CALL CONF_PIO
+IN AL, PA
+MOV ESTADO, AL
+MOV AX, OFFSET ESTADO
+PUSH AX
+CALL LUCES12
+
+INT 0
+END

@@ -1,0 +1,101 @@
+programa ej1P4
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    si (HayFlorEnLaEsquina)
+      mientras HayFlorEnLaEsquina
+        tomarFlor
+        flores:= flores + 1
+  fin
+  proceso recorrer(ES flores: numero; ES ok: boolean)
+  comenzar
+    mientras (ok)
+      si ((PosCa < 100) & (flores > 0))
+        depositarFlor
+        flores:= flores - 1
+        mover
+      sino
+        ok:= F
+  fin
+areas
+  areaC: AreaC(1,1,100,100)
+robots
+  robot cliente
+  variables
+    flores, cant: numero
+    av, ca: numero
+    avIni, caIni: numero
+    ok: boolean
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    juntarFlores(flores)
+    mientras (PosCa < 100)
+      Random(cant, 1, 4)
+      av:= PosAv
+      ca:= PosCa+1
+      EnviarMensaje(av, rS)
+      EnviarMensaje(ca, rS)
+      EnviarMensaje(cant, rS)
+      RecibirMensaje(ok, rS)
+      Pos(av, ca)
+      juntarFlores(flores)
+      recorrer(flores, ok)
+    EnviarMensaje(0, rS)
+  fin
+  robot servidor
+  variables
+    av, ca: numero
+    avIni, caIni, flores: numero
+    cant, contador: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    contador:= 0
+    juntarFlores(flores)
+    mientras (contador < 3)
+      RecibirMensaje(av, *)
+      si (av = 0)
+        contador:= contador + 1
+      si (av = 1)
+        RecibirMensaje(ca, r1)
+        RecibirMensaje(cant, r1)
+        Pos(av, ca)
+        repetir cant
+          depositarFlor
+        Pos(avIni, caIni)
+        EnviarMensaje(V, r1)
+      sino
+        si (av = 2)
+          RecibirMensaje(ca, r2)
+          RecibirMensaje(cant, r2)
+          Pos(av, ca)
+          repetir cant
+            depositarFlor
+          Pos(avIni, caIni)
+          EnviarMensaje(V, r2)
+        sino
+          si (av = 3)
+            RecibirMensaje(ca, r3)
+            RecibirMensaje(cant, r3)
+            Pos(av, ca)
+            repetir cant
+              depositarFlor
+            Pos(avIni, caIni)
+            EnviarMensaje(V, r3)
+  fin
+variables
+  r1: cliente
+  r2: cliente
+  r3: cliente
+  rS: servidor
+comenzar
+  AsignarArea(r1, areaC)
+  AsignarArea(r2, areaC)
+  AsignarArea(r3, areaC)
+  AsignarArea(rS, areaC)
+  Iniciar(r1, 1, 1)
+  Iniciar(r2, 2, 1)
+  Iniciar(r3, 3, 1)
+  Iniciar(rS, 100, 100)
+fin
