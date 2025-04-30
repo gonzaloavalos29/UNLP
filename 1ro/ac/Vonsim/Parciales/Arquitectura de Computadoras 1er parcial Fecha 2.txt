@@ -1,0 +1,75 @@
+
+2.
+Arquitectura de Computadoras
+Apellido
+Parcial 1-Fecha 2-15/10/2024 Nombre.
+Tema 1
+DNI
+El siguiente programa utiliza la pila para pasar un parámetro ¿Qué valor queda almacenado en DL Y DI
+org 1200h
+num db 11, 12, 13, 14, 15 org 2000h
+mov BX, offset num
+org 3500h
+rut: mov BX, SP add BX, 2
+Respuesta:
+mov BX, [BX]
+DL-
+add BX, 4
+mov DL, [BX]
+push BX
+call rut
+sub BX, 2 Mov DH, [BX]
+DH-
+El siguiente programa para VonSim lee un carácter de teclado cada 8 segundos. El programa termina cuando el carácter leido en igual a car. Completar las instrucciones faltantes.
+EOI EQU 20h
+IMR EQU 21h
+INTI EQU 25h
+CONT EQU 10H
+rut dw clk
+org 3000h clk: int 6
+cmp cl, [bx]
+COMP EQU 11H
+inc flag
+org 48
+mov al, offh
+fin:
+mov al, e
+org 1000h
+car
+db "x"
+car_leido db ?
+flag
+db 0
+out CONT, al mov al, 20h
+out EOI, al iret
+org 2000h cli
+mov al, @fdh out IMR, al
+out INT1, al mov al, 8 out COMP, al mov al, 0
+out CONT, al
+Ejercicio Puntos
+1
+2
+3
+4
+Total
+mov bx, offset car_leido
+sti
+loop: cmp flag, 1 jnz loop
+int
+end
+3. Escriba un programa para VonSim que solicite el ingreso de un mensaje de texto que termina con el caracter": (el punto forma parte de la cadena). Luego debe llamar a la subrutina REEMPLAZAR, que funciona asi:
+Solo recibe el mensaje leido por referencia y dos caracteres por valor. El primer caracter (car_viejo) es el que se debe reemplazar en la cadena por el segundo caracter (car_nuevo)
+Además de modificar la cadena de caracteres, devuelve 1 en DL si sustituyo algún carácter, o 0 en caso contrario. El programa principal debe informar en pantalla si se sustituyeron caracteres o no, y finalizar.
+Ejemplo: car_viejo:: 'a', car_nuevo: 'e', msj: "La Casa"-> msj: "Le Cese." DL-1.
+org 1000h
+car_viejo db "a"
+car_nuevo db "e"
+msj_ing
+msj si msj_no msj
+db "Ingrese mensaje: "
+db "Se sustituyeron caracteres." db "No se sustituyeron caracteres." db ?
+4. Escriba un programa para VonSim que permita jugar al MemoLuces. Al iniciar el programa se apagan todas las luces y luego se debe mostrar una secuencia de 7 luces (de las 8 posibles), prendiendo una luz por segundo. Al terminar de mostrarlas, se le debe pedir al usuario que ingrese el número de la luz que no se prendió. Si el usuario acierta, se le informa en pantalla que ganó. La luz que no se prende siempre es una sola y está codificada en la variable no_prende. Nota: en el ejemplo de abajo, no se prende la luz 6, y eso es lo que debe responder el usuario para ganar.
+msjNro ganaste
+org 1000h
+db "Ingrese el nro de luz que nunca se encendio:" db "GANASTE"
+secuencia db 00000001b, 00000100b, 00000010b, 00001000b, 10000000b, 00100000b, 00010000b no_prende db 6
