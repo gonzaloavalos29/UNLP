@@ -145,3 +145,36 @@ var
 begin
 	writeln('MENU DE OPCIONES');
 	writeln('1. Generar archivos binarios maestor y detalle de txt');
+	writeln('2. Actualizar el archivo maestro con el archivo detalle');
+	writeln('3. Listar en un archivo de texto aquellos alumnnos que tengan más materias con finales aprobados que materias sin finales aprobados');
+	writeln('4. Salir del menu de opciones');
+	readln(opcion);
+	while (opcion <> 4) do begin
+		case opcion of
+			1: begin
+				assign(cargaMae, 'maestro.txt');
+				assign(cargaDet, 'detalle.txt');
+				crearArchivoMaestro(mae, cargaMae);
+				crearArchivoDetalle(det, cargaDet);
+			end;
+			2: begin
+				actualizarMaestro(mae, det);
+				writeln('Actualizacion de maestro realizada');
+				imprimirMaestro(mae);
+			end;
+			3: exportarTxt(mae);
+			else
+				writeln('La opcion ingresada no corresponde a ninguna de las mostradas en el menu de opciones');
+			end;
+		writeln('MENU DE OPCIONES');
+		writeln('1. Generar archivos binarios maestro y detalle de txt');
+		writeln('2. Actualizar el archivo maestro con el archivo detalle');
+		writeln('3. Listar en un archivo de texto llamado stock_minimo.txt aquellos productos cuyo stock actual esta por debajo del stock minimo permitido');
+		writeln('4. Salir del menu de opciones');
+		readln(opcion);
+	end;
+end;
+
+BEGIN
+	menu();
+END.

@@ -1,0 +1,5 @@
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.AssemblyInfoInputs.cache
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.AssemblyInfo.cs
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.csproj.CoreCompileInputs.cache
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.sourcelink.json
