@@ -1,0 +1,78 @@
+CONT EQU 10H
+COMP EQU 11H
+
+EOI EQU 20H
+IMR EQU 21H
+INT0 EQU 24H
+INT1 EQU 25H
+
+ORG 1000H
+MSJ DB ?
+SALTO DB 0ah
+FLAG DB 0
+MSJ1 DB "ESCRIBA UN CARACTER"
+salto2 db 0ah
+FW DB ?
+
+ORG 60
+N_F10 DW RUT_F10
+
+ORG 20
+N_CLK DW RUT_TIMER
+
+ORG 3000H
+RUT_F10: MOV AL, 0FFH
+         OUT IMR, AL
+         MOV FLAG, 1
+         MOV AL, EOI
+         OUT EOI, AL
+         IRET
+ORG 3200H
+RUT_TIMER: MOV BX, OFFSET MSJ1
+           MOV AL, OFFSET FW - OFFSET MSJ1
+           INT 7
+           MOV BX, OFFSET MSJ
+           INT 6
+           MOV AL, [BX]
+           CALL MINUSCULA
+           CMP DH, 0
+           JNZ FW1
+FW1:       MOV AL, 0
+           OUT CONT, AL
+           MOV AL, EOI
+           OUT EOI, AL
+           IRET
+ORG 3300H
+MINUSCULA: MOV DH, 0FFH
+           CMP AL, 'a'
+           JS FIN
+           CMP AL, 07bh ; z minúscula
+           JNS FIN
+           MOV BX, OFFSET MSJ
+           MOV AL, OFFSET FLAG - OFFSET MSJ
+           INT 7
+           MOV DH, 00H
+FIN:       RET
+
+ORG 2000H
+CLI
+MOV AL, 11111100B
+OUT IMR, AL
+MOV AL, 15
+OUT INT0, AL ; CONF F10
+MOV AL, 5
+OUT INT1, AL ; CONF TIMER
+MOV AL, 1
+OUT COMP, AL
+MOV AL, 0
+OUT CONT, AL
+STI
+MOV BX, OFFSET MSJ
+NOP
+NOP
+NOP
+NOP
+LOOP: CMP FLAG, 1
+      JNZ LOOP
+INT 0
+END
