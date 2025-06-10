@@ -113,3 +113,19 @@ begin
 	end;
 	close(mae);
 end;
+VAR
+	det1, det2, det3: arcDetalle;
+	mae: arcMaestro;
+	txt1, txt2, txt3, txt4: text;
+BEGIN
+	assign(txt1, 'maestro.txt');
+	assign(txt2, 'detalle1.txt');
+	assign(txt3, 'detalle2.txt');
+	assign(txt4, 'detalle3.txt');
+	crearMaestro(mae, txt1);
+	crearDetalle(det1, txt2, 'Detalle1');
+	crearDetallee(det2, txt3, 'Detalle2');
+	crearDetalle(det3, txt4, 'Detalle3');
+	actualizarMaestro(mae, det1, det2, det3);
+	imprimirMaestro(mae);
+END.
