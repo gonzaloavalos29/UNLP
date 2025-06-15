@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chach\\Desktop\\UNLP\\2do\\.net\\trabajoFinal.net\\CentroEventos\\CentroEventos.Aplicacion\\CentroEventos.Aplicacion.csproj": {}
+    "C:\\Users\\chach\\desktop\\unlp\\2do\\.net\\trabajofinal.net\\CentroEventos\\CentroEventos.UI\\CentroEventos.UI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chach\\Desktop\\UNLP\\2do\\.net\\trabajoFinal.net\\CentroEventos\\CentroEventos.Aplicacion\\CentroEventos.Aplicacion.csproj": {
+    "C:\\Users\\chach\\desktop\\unlp\\2do\\.net\\trabajofinal.net\\CentroEventos\\CentroEventos.UI\\CentroEventos.UI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chach\\Desktop\\UNLP\\2do\\.net\\trabajoFinal.net\\CentroEventos\\CentroEventos.Aplicacion\\CentroEventos.Aplicacion.csproj",
-        "projectName": "CentroEventos.Aplicacion",
-        "projectPath": "C:\\Users\\chach\\Desktop\\UNLP\\2do\\.net\\trabajoFinal.net\\CentroEventos\\CentroEventos.Aplicacion\\CentroEventos.Aplicacion.csproj",
+        "projectUniqueName": "C:\\Users\\chach\\desktop\\unlp\\2do\\.net\\trabajofinal.net\\CentroEventos\\CentroEventos.UI\\CentroEventos.UI.csproj",
+        "projectName": "CentroEventos.UI",
+        "projectPath": "C:\\Users\\chach\\desktop\\unlp\\2do\\.net\\trabajofinal.net\\CentroEventos\\CentroEventos.UI\\CentroEventos.UI.csproj",
         "packagesPath": "C:\\Users\\chach\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chach\\Desktop\\UNLP\\2do\\.net\\trabajoFinal.net\\CentroEventos\\CentroEventos.Aplicacion\\obj\\",
+        "outputPath": "C:\\Users\\chach\\desktop\\unlp\\2do\\.net\\trabajofinal.net\\CentroEventos\\CentroEventos.UI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -61,6 +61,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
