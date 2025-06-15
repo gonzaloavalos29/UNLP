@@ -1,7 +1,6 @@
 package Practica4.Ej1;
 
 import java.util.Random;
-
 public class Consulta {
 	
 	private Integer desde;
