@@ -1,4 +1,3 @@
-using System.Linq;
 using CentroEventos.Aplicacion.Entidades;
 using CentroEventos.Aplicacion.Interfaces;
 using CentroEventos.Aplicacion.Servicios;

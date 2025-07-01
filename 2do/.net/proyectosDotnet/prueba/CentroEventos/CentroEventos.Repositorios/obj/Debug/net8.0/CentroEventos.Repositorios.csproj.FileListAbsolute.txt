@@ -66,6 +66,3 @@ C:\Users\Usuario\Documents\GitHub\Avalos_Buscemi_Final\CentroEventos\CentroEvent
 C:\Users\Usuario\Documents\GitHub\Avalos_Buscemi_Final\CentroEventos\CentroEventos.Repositorios\obj\Debug\net8.0\CentroEventos.Repositorios.pdb
 C:\Users\Usuario\Documents\GitHub\Avalos_Buscemi_Final\CentroEventos\CentroEventos.Repositorios\obj\Debug\net8.0\CentroEventos.Repositorios.genruntimeconfig.cache
 C:\Users\Usuario\Documents\GitHub\Avalos_Buscemi_Final\CentroEventos\CentroEventos.Repositorios\obj\Debug\net8.0\ref\CentroEventos.Repositorios.dll
-C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\prueba\CentroEventos\CentroEventos.Repositorios\obj\Debug\net8.0\CentroEventos.Repositorios.dll
-C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\prueba\CentroEventos\CentroEventos.Repositorios\obj\Debug\net8.0\refint\CentroEventos.Repositorios.dll
-C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\prueba\CentroEventos\CentroEventos.Repositorios\obj\Debug\net8.0\CentroEventos.Repositorios.pdb

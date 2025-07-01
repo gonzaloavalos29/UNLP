@@ -124,6 +124,11 @@ namespace CentroEventos.Repositorios.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("esAdmin")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("hashpassword")
                         .IsRequired()
                         .HasColumnType("TEXT");

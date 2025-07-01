@@ -3,10 +3,11 @@ namespace CentroEventos.Aplicacion.Entidades;
 
 public class Usuario
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
-    public string Nombre { get; set; } = null!;
-    public string Apellido { get; set; } = null!;
-    public string Email { get; set; } = null!;
-    public string HashPassword { get; set; } = null!;
-    public List<Permiso> Permisos { get; set; } = new();
+    public Guid id { get; set; }
+    public string nombre { get; set; } = null!;
+    public string apellido { get; set; } = null!;
+    public string email { get; set; } = null!;
+    public string hashpassword { get; set; } = null!;
+    public List<Permiso> permisos { get; set; } = new();
+    
 }

@@ -7,10 +7,12 @@
 @inject ServicioSesionUsuario Sesion
 @inject IServicioAutorizacion Autorizacion
 
+<h3>Listado de Usuarios</h3>
+
 @if (!Sesion.EstaLogeado)
 {
     <p>No estás logueado.</p>
-    <NavLink href="/login">Iniciar sesión</NavLink>
+    <NavLink href="/">Iniciar sesión</NavLink>
 }
 else
 {

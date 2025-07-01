@@ -1,20 +1,20 @@
 using CentroEventos.Repositorios.Contexto;
 using CentroEventos.Repositorios.Repositorios;
 using CentroEventos.Aplicacion.Interfaces;
+using CentroEventos.Aplicacion.Servicios;
 using CentroEventos.Aplicacion.Validadores;
 using Microsoft.EntityFrameworkCore;
 using CentroEventos.UI.Components;
 using CentroEventos.Aplicacion.CasosDeUso;
+using Microsoft.AspNetCore.Components.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 
-builder.Services.AddDbContext<CentroEventosContext>(options =>
-    options.UseSqlite("Data Source=centroeventos.db"));
+builder.Services.AddDbContext<CentroEventosContext>(options =>options.UseSqlite($"Data Source=..\\CentroEventos.Repositorios\\centroeventos.db"));
 
 builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuarioEF>();
 builder.Services.AddScoped<IRepositorioEventoDeportivo, RepositorioEventoEF>();

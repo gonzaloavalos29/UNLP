@@ -322,6 +322,3 @@ C:\Users\Usuario\Documents\GitHub\Avalos_Buscemi_Final\CentroEventos\CentroEvent
 C:\Users\Usuario\Documents\GitHub\Avalos_Buscemi_Final\CentroEventos\CentroEventos.UI\obj\Debug\net8.0\CentroEventos.UI.pdb
 C:\Users\Usuario\Documents\GitHub\Avalos_Buscemi_Final\CentroEventos\CentroEventos.UI\obj\Debug\net8.0\CentroEventos.UI.genruntimeconfig.cache
 C:\Users\Usuario\Documents\GitHub\Avalos_Buscemi_Final\CentroEventos\CentroEventos.UI\obj\Debug\net8.0\ref\CentroEventos.UI.dll
-C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\prueba\CentroEventos\CentroEventos.UI\obj\Debug\net8.0\CentroEventos.UI.dll
-C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\prueba\CentroEventos\CentroEventos.UI\obj\Debug\net8.0\refint\CentroEventos.UI.dll
-C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\prueba\CentroEventos\CentroEventos.UI\obj\Debug\net8.0\CentroEventos.UI.pdb

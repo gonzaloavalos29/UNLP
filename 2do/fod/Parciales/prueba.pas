@@ -27,7 +27,7 @@ end;
 procedure generarInforme(var arc: archivo);
 var
 	anioAct, eventoAct, artistaAct: integer;
-	likesTot, dislikesTot, diferencia, cantPresPorAnio: integer;
+	likesTot, dislikesTot, cantPresPorAnio: integer;
 	minPunt, puntTot: real;
 	minArtista, minEvento: string;
 	pres: presentacion;
@@ -43,11 +43,11 @@ begin
 		cantPresPorAnio:= 0;
 		while (pres.anio = anioAct) do begin
 			eventoAct:= pres.codEvento;
-			cantPresPorAnio:= cantPresPorAnio + 1;
 			while (pres.codEvento = eventoAct) and (pres.anio = anioAct) do begin
 				artistaAct:= pres.codArtista;
 				likesTot:= 0; dislikesTot:= 0; puntTot:= 0;
 				while ((pres.codEvento = eventoAct) and (pres.anio = anioAct) and (pres.codArtista = artistaAct)) do begin
+					cantPresPorAnio:= cantPresPorAnio + 1;
 					likesTot:= likesTot + pres.likes;
 					dislikesTot:= dislikesTot + pres.dislikes;
 					puntTot:= puntTot + pres.puntaje;
@@ -61,8 +61,7 @@ begin
 				writeln(pres.artista);
 				writeln('Likes totales: ', likesTot);
 				writeln('Dislikes totales: ', dislikesTot);
-				diferencia:= likesTot - dislikesTot;
-				writeln('Diferencia: ', diferencia);
+				writeln('Diferencia: ', likesTot - dislikesTot);
 				writeln('Puntaje obtenido: ', puntTot);
 			end;
 			writeln(eventoAct, ': ', pres.codEvento);

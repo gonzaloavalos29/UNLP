@@ -15,7 +15,7 @@ public class EventoDeportivoAltaUseCase
         _servicioAutorizacion = servicioAutorizacion;
     }
 
-    public void Ejecutar(EventoDeportivo evento, Guid idUsuario,ValidadorEventoDeportivo validador){
+    public void Ejecutar(EventoDeportivo evento, Guid idUsuario, ValidadorEventoDeportivo validador){
         if (!_servicioAutorizacion.PoseeElPermiso(idUsuario, Permiso.EventoAlta))
                 throw new UnauthorizedAccessException("El usuario no tiene permiso para crear eventos.");
         validador.Validar(evento);

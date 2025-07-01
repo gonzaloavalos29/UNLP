@@ -26,20 +26,24 @@
 
         <label>Email:</label>
         <input class="form-control mb-2" @bind="usuario.email" />
-
-        <label>Permisos:</label>
-        <div class="mb-3">
-            @foreach (var permiso in TodosLosPermisos)
+        @if (Sesion.UsuarioActual!.esAdmin )
+        {
+            @if (Sesion.UsuarioActual.id != usuario?.id || Sesion.UsuarioActual.esAdmin)
             {
-                <div>
-                    <input type="checkbox"
-                           checked="@PermisosSeleccionados.Contains(permiso)"
-                           @onchange="@((ChangeEventArgs e) => TogglePermiso(permiso, (bool)e.Value!))" />
-                    <label>@permiso</label>
+                <label>Permisos:</label>
+                <div class="mb-3">
+                    @foreach (var permiso in TodosLosPermisos)
+                    {
+                        <div>
+                            <input type="checkbox"
+                                   checked="@PermisosSeleccionados.Contains(permiso)"
+                                   @onchange="@((ChangeEventArgs e) => TogglePermiso(permiso, (bool)e.Value!))" />
+                            <label>@permiso</label>
+                        </div>
+                    }
                 </div>
             }
-        </div>
-
+        }
         <button class="btn btn-primary" @onclick="Modificar">Guardar Cambios</button>
     </div>
 }
@@ -62,6 +66,14 @@
 
     protected override void OnInitialized()
     {
+        bool puedeEditar = Sesion.UsuarioActual!.id == IdUsuario ||Autorizacion.PoseeElPermiso(Sesion.UsuarioActual!.id, Permiso.UsuarioModificacion);
+        if (!puedeEditar)
+        {
+            mensaje = "No tenés permiso para editar a este usuario.";
+            usuario = null;
+            return;
+        }
+
         BuscarUsuario(IdUsuario);
     }
 
@@ -77,23 +89,48 @@
         }
         else
         {
-            PermisosSeleccionados = new List<Permiso>(usuario.permisos ?? new());
+            if (Sesion.UsuarioActual!.esAdmin || Autorizacion.PoseeElPermiso(Sesion.UsuarioActual.id, Permiso.UsuarioModificacion))
+            {
+                PermisosSeleccionados = new List<Permiso>(usuario.permisos ?? new());
+            }
+            else
+            {
+                PermisosSeleccionados = new();
+            }
         }
     }
-
     private async Task Modificar()
     {
         mensaje = null;
         exito = false;
 
+        var esEdicionPropia = usuario!.id == Sesion.UsuarioActual!.id;
+        var permisosOriginales = usuario.permisos?.ToList() ?? new List<Permiso>();
+
         try
         {
-            usuario!.permisos = new List<Permiso>(PermisosSeleccionados);
+            if (esEdicionPropia && !Autorizacion.PoseeElPermiso(usuario.id, Permiso.UsuarioModificacion))
+            {
+                usuario.permisos = permisosOriginales.Append(Permiso.UsuarioModificacion).Distinct().ToList();
+            }
+            else if (Sesion.UsuarioActual!.esAdmin)
+            {
+                usuario.permisos = new List<Permiso>(PermisosSeleccionados);
+            }
+            else
+            {
+                var original = Repo.ObtenerPorId(usuario.id);
+                usuario.permisos = original?.permisos ?? new();
+            }
 
-            ModificarUsuario.Ejecutar(usuario, Sesion.UsuarioActual!.id, Validador);
+            ModificarUsuario.Ejecutar(usuario, Sesion.UsuarioActual.id, Validador);
             exito = true;
+            if (esEdicionPropia && !Sesion.UsuarioActual!.esAdmin)
+            {
+                usuario.permisos = permisosOriginales;
+            }
 
-            if (usuario.id == Sesion.UsuarioActual.id)
+            if (esEdicionPropia)
                 Sesion.IniciarSesion(usuario);
 
             await Task.Delay(1000);
@@ -101,16 +138,16 @@
         }
         catch (Exception ex)
         {
+            usuario!.permisos = permisosOriginales;
             mensaje = ex.Message;
         }
-    }
 
+    }
     private void TogglePermiso(Permiso permiso, bool estaMarcado)
     {
         if (estaMarcado)
         {
-            if (!PermisosSeleccionados.Contains(permiso))
-                PermisosSeleccionados.Add(permiso);
+            if (!PermisosSeleccionados.Contains(permiso)) PermisosSeleccionados.Add(permiso);
         }
         else
         {
@@ -118,3 +155,4 @@
         }
     }
 }
+

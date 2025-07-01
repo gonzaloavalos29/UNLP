@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yqj4yF0P81M=",
+  "dgSpecHash": "bSS0+TDwikw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\chach\\desktop\\unlp\\2do\\.net\\proyectosdotnet\\prueba\\CentroEventos\\CentroEventos.Repositorios\\CentroEventos.Repositorios.csproj",
+  "projectFilePath": "C:\\Users\\chach\\Desktop\\UNLP\\2do\\.net\\Avalos_Buscemi_Final\\CentroEventos\\CentroEventos.Repositorios\\CentroEventos.Repositorios.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chach\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\chach\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

@@ -1,7 +1,6 @@
 using CentroEventos.Repositorios.Contexto;
 using CentroEventos.Repositorios.Repositorios;
 using CentroEventos.Aplicacion.Interfaces;
-using CentroEventos.Aplicacion.Servicios;
 using CentroEventos.Aplicacion.Validadores;
 using Microsoft.EntityFrameworkCore;
 using CentroEventos.UI.Components;
@@ -43,14 +42,14 @@ builder.Services.AddScoped<PersonaAltaUseCase>();
 builder.Services.AddScoped<PersonaBajaUseCase>();
 builder.Services.AddScoped<PersonaListarUseCase>();
 builder.Services.AddScoped<PersonaModificarUseCase>();
+builder.Services.AddScoped<RegistrarUsuarioUseCase>();
 builder.Services.AddScoped<ReservaAltaUseCase>();
 builder.Services.AddScoped<ReservaBajaUseCase>();
 builder.Services.AddScoped<ReservaListarUseCase>();
 builder.Services.AddScoped<ReservaModificarUseCase>();
-builder.Services.AddScoped<UsuarioAltaUseCase>();
 builder.Services.AddScoped<UsuarioBajaUseCase>();
 builder.Services.AddScoped<UsuarioModificarUseCase>();
-builder.Services.AddScoped<ServicioSesionUsuario>();
+builder.Services.AddSingleton<ServicioSesionUsuario>();
 
 
 var app = builder.Build();

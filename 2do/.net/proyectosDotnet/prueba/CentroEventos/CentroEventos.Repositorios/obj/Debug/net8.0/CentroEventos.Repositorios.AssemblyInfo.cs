@@ -13,7 +13,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CentroEventos.Repositorios")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+88314f1889d6bed06301c7f846956f222932af1f")]
+<<<<<<< HEAD
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c962edfa169fae9d915ef119aec61397d0a1a127")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5602b686c1001087b68fa694f25d8c15c7128b28")]
+>>>>>>> 21b69ffa5c38b31a5cdea5d6b29d656dc92a2325
 [assembly: System.Reflection.AssemblyProductAttribute("CentroEventos.Repositorios")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CentroEventos.Repositorios")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

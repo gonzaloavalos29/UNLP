@@ -26,6 +26,9 @@
         <label>Descripción:</label>
         <textarea class="form-control mb-2" @bind="evento.Descripcion" />
 
+        <label>Lugar:</label>
+        <textarea class="form-control mb-2" @bind="evento.Lugar" />
+
         <label>Fecha y Hora de Inicio:</label>
         <input type="datetime-local" class="form-control mb-2"
             @bind="evento.FechaHoraInicio" /> @* "yyyy-MM-ddTHH:mm" *@
@@ -54,14 +57,11 @@
 
 @code {
     [Parameter] public int? Id { get; set; }
-
     EventoDeportivo evento = new();
     bool _esNuevo = true;
     bool exito = false;
     string? mensaje;
     List<Persona> personas = new();
-    string fechaInicio = "";
-
     protected override void OnInitialized()
     {
         personas = RepoPersonas.Listar();
@@ -72,17 +72,27 @@
             if (ev != null)
             {
                 evento = ev;
-                fechaInicio = evento.FechaHoraInicio.ToString("yyyy-MM-ddTHH:mm");
                 _esNuevo = false;
             }
         }
         else
         {
-            if (personas.Any())
-                evento.ResponsableId = personas.First().Id;
+            evento = new EventoDeportivo
+            {
+                Nombre = "",
+                Descripcion = "",
+                Lugar="",
+                FechaHoraInicio = DateTime.Now
+                    .AddMinutes(10)
+                    .AddSeconds(-DateTime.Now.Second)
+                    .AddMilliseconds(-DateTime.Now.Millisecond),
+                DuracionHoras = 1,
+                CupoMaximo = 10,
+                ResponsableId = personas.FirstOrDefault()?.Id ?? 0
+            };
+        _esNuevo = true;
         }
     }
-
     private async Task Guardar()
     {
         mensaje = null;
@@ -90,8 +100,6 @@
 
         try
         {
-            evento.FechaHoraInicio = DateTime.Parse(fechaInicio);
-
             if (_esNuevo)
                 EventoAlta.Ejecutar(evento, Sesion.UsuarioActual!.id, Validador);
             else
