@@ -1,0 +1,17 @@
+ORG 1000H
+  num dw 4
+  res db ?
+
+ORG 3000H
+ESPAR: MOV AX, NUM
+       AND AX, 0001H
+       JZ PAR
+       MOV RES, 00H
+       JMP FIN
+PAR:   MOV RES, 0FFH
+FIN:   RET
+
+ORG 2000H
+CALL ESPAR
+HLT
+END
