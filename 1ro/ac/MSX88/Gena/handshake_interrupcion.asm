@@ -29,10 +29,10 @@ IP_HAND DW IMPRIMIR
 ORG 2000H
 ; Configuro PIC
 CLI
-MOV AL, 11111011B ; Solo HANDSHAKE habilitado
-OUT IMR, AL
-MOV AL, 9
-OUT INT2, AL ; Mando el ID seleccionado al registro INT2
+  MOV AL, 11111011B ; Solo HANDSHAKE habilitado
+  OUT IMR, AL
+  MOV AL, 9
+  OUT INT2, AL ; Mando el ID seleccionado al registro INT2
 STI
 MOV BX, OFFSET MENSAJE ; Para recorrer el mensaje
 ; Configuro el Handshake para interrupción
@@ -41,7 +41,7 @@ OR AL, 80H ; 80H = 10000000
 OUT HAND_ESTADO, AL ; Estado = 1xxxxxxx
 ; Continuamos con el programa principal
 POLL: CMP BX, OFFSET FIN ; Chequeo si llegué al final
-  JNZ POLL
+      JNZ POLL
 ; Desactivo Handshake por interrupción
 IN AL, HAND_ESTADO ; Tomo estado actual
 AND AL, 07FH ; 7FH = 01111111
