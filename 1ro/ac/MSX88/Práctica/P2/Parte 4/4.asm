@@ -1,0 +1,50 @@
+PA EQU 30H
+PB EQU 31H
+CA EQU 32H
+CB EQU 33H
+
+ORG 1000H
+MSJ DB "Arquitectura de Computadoras: ACTIVADA"
+MSJ_FIN DB "Fin de Programa"
+FIN DB 0
+
+ORG 3000H
+A:       CMP AL, 0
+         JNZ SEGUIR
+         MOV BX, OFFSET MSJ_FIN
+         MOV AL, OFFSET FIN - OFFSET MSJ_FIN
+         INT 7
+         MOV FIN, 1
+SEGUIR:  RET
+
+ORG 3200H
+B: PUSH AX
+   NOT AL
+   OUT PB, AL
+   POP AX
+   RET
+ORG 3400H
+C:       PUSH AX
+         AND AL, 10000000B
+         JZ VOLVER
+         MOV BX, OFFSET MSJ
+         MOV AL, OFFSET MSJ_FIN - OFFSET MSJ
+         INT 7
+VOLVER:  POP AX
+         RET
+
+ORG 2000H
+MOV AL, 0FFH
+OUT CA, AL
+MOV AL, 0
+OUT CB, AL
+
+LOOP: IN AL, PA
+      CALL A
+      CMP FIN, 1
+      JZ TERMINAR
+      CALL B
+      CALL C
+      JMP LOOP
+TERMINAR: INT 0
+          END

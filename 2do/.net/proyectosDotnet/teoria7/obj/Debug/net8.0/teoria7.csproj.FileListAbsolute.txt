@@ -1,0 +1,15 @@
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.AssemblyInfoInputs.cache
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.AssemblyInfo.cs
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.csproj.CoreCompileInputs.cache
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.sourcelink.json
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\bin\Debug\net8.0\teoria7.exe
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\bin\Debug\net8.0\teoria7.deps.json
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\bin\Debug\net8.0\teoria7.runtimeconfig.json
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\bin\Debug\net8.0\teoria7.dll
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\bin\Debug\net8.0\teoria7.pdb
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.dll
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\refint\teoria7.dll
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.pdb
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\teoria7.genruntimeconfig.cache
+C:\Users\chach\Desktop\UNLP\2do\.net\proyectosDotnet\teoria7\obj\Debug\net8.0\ref\teoria7.dll

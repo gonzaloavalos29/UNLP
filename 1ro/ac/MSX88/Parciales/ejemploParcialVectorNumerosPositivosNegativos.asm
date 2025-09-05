@@ -1,0 +1,50 @@
+ORG 1000H
+VECTOR DW -10, 20, -50, 40, -58, 120
+MSJ1 DB "GANAN LOS POSITIVOS"
+MSJ2 DB "GANAN LOS NEGATIVOS"
+NEGATIVOS DW 0
+POSITIVOS DW 0
+
+ORG 3000H
+ES_NEGATIVO: MOV AX, [BX]
+             AND AX, 10000000B
+             JNZ NEGATIVO
+             MOV DX, 0
+             JMP TERM
+             NEGATIVO: MOV DX, 1
+             TERM: RET
+CONTAR_NEGATIVOS: MOV BX, SP
+                  ADD BX, 2
+                  MOV CL, [BX] ; GUARDO CANT
+                  ADD BX, 2
+                  MOV BX, [BX]
+LOOP:             MOV DX, [BX] ; GUARDO EL NUM
+                  CALL ES_NEGATIVO
+                  CMP DX, 1
+                  JZ ES_NEG
+                  INC POSITIVOS
+                  JMP SIG
+ES_NEG:           INC NEGATIVOS
+SIG:              ADD BX, 2
+                  DEC CL
+                  JNZ LOOP
+                  MOV AX, NEGATIVOS
+                  RET
+ORG 2000H
+MOV BX, OFFSET VECTOR
+MOV CL, OFFSET MSJ1 - OFFSET VECTOR
+MOV CH, 0
+PUSH BX
+PUSH CX
+CALL CONTAR_NEGATIVOS
+CMP AX, POSITIVOS
+JS MASPOSITIVOS
+MOV BX, OFFSET MSJ2
+MOV AL, OFFSET NEGATIVOS - OFFSET MSJ2
+INT 7
+JMP FINAL
+MASPOSITIVOS: MOV BX, OFFSET MSJ1
+              MOV AL, OFFSET MSJ2 - OFFSET MSJ1
+              INT 7
+FINAL:        INT 0
+END

@@ -1,0 +1,37 @@
+package Ej5;
+
+public class Calculadora {
+
+	private static Datos d;
+	public Calculadora() {
+		
+	}
+	
+	public static Datos maxminPromA(int[] arreglo) {
+		int max = Integer.MIN_VALUE;
+		int min = Integer.MAX_VALUE;
+		double sum = 0;
+		for (int i = 0; i < arreglo.length; i++) {
+			if (arreglo[i] > max) max = arreglo[i];
+			if (arreglo[i] < min) min = arreglo[i];
+			sum += arreglo[i];
+		}
+		Datos obj = new Datos(max, min, sum/arreglo.length);
+		return obj;
+	}
+	
+	public static void maxminpromB(int[] arreglo, Datos d) {
+		int max = Integer.MIN_VALUE;
+		int min = Integer.MAX_VALUE;
+		double sum = 0;
+		for (int i = 0; i < arreglo.length; i++) {
+			if (arreglo[i] > max) max = arreglo[i];
+			if (arreglo[i] < min) min = arreglo[i];
+			sum += arreglo[i];
+		}
+		
+		d.setMax(max);
+		d.setMin(min);
+		d.setProm(sum/arreglo.length);
+	}
+}

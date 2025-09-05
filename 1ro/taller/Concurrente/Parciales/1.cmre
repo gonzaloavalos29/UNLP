@@ -1,0 +1,24 @@
+programa parcial1
+procesos
+  proceso recorrerAvenida(E numAv: numero)
+  comenzar
+    Pos(numAv, 1)
+    repetir 99
+      mover
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot florero
+  comenzar
+    recorrerAvenida(1)
+  fin
+  robot papelero
+  comenzar
+  fin
+variables
+  r1, r2, r3, r4: robot1
+comenzar
+  AsignarArea(R_info, ciudad)
+  Iniciar(R_info, 1,1)
+fin

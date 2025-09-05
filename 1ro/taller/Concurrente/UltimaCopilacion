@@ -1,0 +1,29 @@
+{ chach 2024-10-26T12:39:13.613 }
+programa ejemplo1
+
+procesos
+  proceso juntarFlores
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+  fin
+  
+areas
+  avenidas : AreaPC(1,1,2,11)
+ 
+robots
+  robot florero
+  comenzar
+    repetir 10
+      juntarFlores
+      mover
+  fin
+  
+variables
+  robot1, robot2 : florero
+comenzar
+  AsignarArea(robot1,avenidas)
+  AsignarArea(robot2,avenidas)
+  Iniciar(robot1,1,1)
+  Iniciar(robot2,2,1)
+fin

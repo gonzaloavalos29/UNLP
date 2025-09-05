@@ -1,0 +1,15 @@
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\bin\Debug\net8.0\teoria3.exe
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\bin\Debug\net8.0\teoria3.deps.json
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\bin\Debug\net8.0\teoria3.runtimeconfig.json
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\bin\Debug\net8.0\teoria3.dll
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\bin\Debug\net8.0\teoria3.pdb
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\obj\Debug\net8.0\teoria3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\obj\Debug\net8.0\teoria3.AssemblyInfoInputs.cache
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\obj\Debug\net8.0\teoria3.AssemblyInfo.cs
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\obj\Debug\net8.0\teoria3.csproj.CoreCompileInputs.cache
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\obj\Debug\net8.0\teoria3.sourcelink.json
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\obj\Debug\net8.0\teoria3.dll
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\obj\Debug\net8.0\refint\teoria3.dll
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\obj\Debug\net8.0\teoria3.pdb
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\obj\Debug\net8.0\teoria3.genruntimeconfig.cache
+C:\Users\chach\desktop\unlp\2do\.net\teoria3\obj\Debug\net8.0\ref\teoria3.dll

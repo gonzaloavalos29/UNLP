@@ -1,0 +1,79 @@
+programa ej5p5
+procesos
+  proceso colocarPapeles(E cant: numero; E av: numero; E ca: numero)
+  variables
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    BloquearEsquina(av, ca)
+    Pos(av, ca)
+    repetir cant
+      depositarPapel
+    Pos(avIni, caIni)
+    LiberarEsquina(av, ca)
+  fin
+  proceso recolectarPapeles(E cant: numero; E av: numero; E ca: numero)
+  variables
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    repetir cant
+      BloquearEsquina(av, ca)
+      Pos(av, ca)
+      tomarPapel
+      Pos(avIni, caIni)
+      LiberarEsquina(av, ca)
+  fin
+areas
+  area1: AreaP(10,1,10,1)
+  area2: AreaP(11,1,11,1)
+  area3: AreaP(12,1,12,1)
+  area4: AreaP(13,1,13,1)
+  areaC: AreaC(100,1,100,1)
+robots
+  robot cliente
+  variables
+    av, ca, cant: numero
+  comenzar
+    av:= PosAv
+    ca:= PosCa
+    repetir 4
+      EnviarMensaje(av, r4)
+      RecibirMensaje(cant, r4)
+      recolectarPapeles(cant, 100, 1)
+      colocarPapeles(cant, av, ca)
+  fin
+  robot servidor
+  variables
+    av, cant: numero
+  comenzar
+    repetir 12
+      RecibirMensaje(av, *)
+      Random(cant, 1, 5)
+      colocarPapeles(cant, 100, 1)
+      si (av = 10)
+        EnviarMensaje(cant, r1)
+      si (av = 11)
+        EnviarMensaje(cant, r2)
+      si (av = 12)
+        EnviarMensaje(cant, r3)
+  fin
+variables
+  r1, r2, r3: cliente
+  r4: servidor
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area2)
+  AsignarArea(r3, area3)
+  AsignarArea(r4, area4)
+  AsignarArea(r1, areaC)
+  AsignarArea(r2, areaC)
+  AsignarArea(r3, areaC)
+  AsignarArea(r4, areaC)
+  Iniciar(r1,10,1)
+  Iniciar(r2,11,1)
+  Iniciar(r3,12,1)
+  Iniciar(r4,13,1)
+fin

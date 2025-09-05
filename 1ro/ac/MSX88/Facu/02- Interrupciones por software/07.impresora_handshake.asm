@@ -1,0 +1,9 @@
+PA EQU 30H
+PB EQU 31H
+CA EQU 32H
+CB EQU 33H
+
+ORG 1000H
+
+int 0
+end

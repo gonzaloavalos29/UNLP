@@ -1,0 +1,112 @@
+programa ej2p5
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores + 1
+  fin
+  proceso juntarPapeles
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+  fin
+  proceso recorrerEtapa(E cant: numero; ES flores: numero)
+  comenzar
+    repetir cant
+      juntarFlores(flores)
+      juntarPapeles
+      mover
+  fin
+  proceso depositarFlores(E av: numero; E ca: numero; ES flores: numero)
+  variables
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    BloquearEsquina(av, ca)
+    Pos(av, ca)
+    mientras flores > 0
+      depositarFlor
+      flores:= flores - 1
+    Pos(avIni, caIni)
+    LiberarEsquina(av, ca)
+  fin
+  proceso buscarFlores(E av: numero; E ca: numero; ES flores: numero)
+  variables
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    BloquearEsquina(av, ca)
+    Pos(av, ca)
+    juntarFlores(flores)
+    Pos(avIni, caIni)
+    LiberarEsquina(av, ca)
+  fin
+areas
+  area1: AreaP(1, 1, 100, 1)
+  area2: AreaP(1, 2, 100, 2)
+  area3: AreaP(1, 3, 100, 3)
+  area4: AreaP(1, 4, 1, 4)
+  areaC: AreaC(50, 50, 50, 50)
+robots
+  robot recolector
+  variables
+    flores: numero
+    ok: boolean
+  comenzar
+    flores:= 0
+    derecha
+    mientras (PosAv < 91)
+      recorrerEtapa(10, flores)
+      depositarFlores(50, 50, flores)
+      si (PosCa = 1)
+        EnviarMensaje(V, r2)
+        EnviarMensaje(V, r3)
+        RecibirMensaje(ok, r2)
+        RecibirMensaje(ok, r3)
+      si (PosCa = 2)
+        EnviarMensaje(V, r1)
+        EnviarMensaje(V, r3)
+        RecibirMensaje(ok, r1)
+        RecibirMensaje(ok, r3)
+      si (PosCa = 3)
+        EnviarMensaje(V, r1)
+        EnviarMensaje(V, r2)
+        RecibirMensaje(ok, r1)
+        RecibirMensaje(ok, r2)
+    recorrerEtapa(9, flores)
+    juntarFlores(flores)
+    juntarPapeles
+    depositarFlores(50, 50, flores)
+    EnviarMensaje(V, rF)
+  fin
+  robot fiscalizador
+  variables
+    ok: boolean
+    flores: numero
+  comenzar
+    flores:= 0
+    repetir 3
+      RecibirMensaje(ok, *)
+    buscarFlores(50, 50, flores)
+    Informar("Cant flores ", flores)
+  fin
+variables
+  r1, r2, r3: recolector
+  rF: fiscalizador
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area2)
+  AsignarArea(r3, area3)
+  AsignarArea(rF, area4)
+  AsignarArea(r1, areaC)
+  AsignarArea(r2, areaC)
+  AsignarArea(r3, areaC)
+  AsignarArea(rF, areaC)
+  Iniciar(r1,1,1)
+  Iniciar(r2,1,2)
+  Iniciar(r3,1,3)
+  Iniciar(rF,1,4)
+fin

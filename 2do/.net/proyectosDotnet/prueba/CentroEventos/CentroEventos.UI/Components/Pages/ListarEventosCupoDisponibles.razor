@@ -1,0 +1,66 @@
+@page "/listaeventoscupo"
+@rendermode InteractiveServer
+@inject EventoDeportivoListarUseCase ListarEventos
+@inject ListarEventosConCupoDisponibleUseCase EventoCupo
+@inject NavigationManager Nav
+@inject ServicioSesionUsuario Sesion
+@inject IServicioAutorizacion Autorizacion
+@inject IRepositorioPersona RepoPersonas
+
+<h3>Listado de Eventos Deportivos Con Cupo </h3>
+
+@if (!Sesion.EstaLogeado)
+{
+    <p>No estás logueado.</p>
+    <NavLink href="/">Iniciar sesión</NavLink>
+}
+else
+{
+    @if (eventos.Count == 0)
+    {
+        <p>No hay eventos con cupo disponible.</p>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Fecha y Hora</th>
+                <th>Cupo Maximo</th>
+                <th>Responsable</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var evento in eventos)
+            {
+                var responsable = personas.FirstOrDefault(p => p.Id == evento.ResponsableId);
+                <tr>
+                    <td>@evento.Id</td>
+                    <td>@evento.Nombre</td>
+                    <td>@evento.Descripcion</td>
+                    <td>@evento.FechaHoraInicio.ToString("g")</td>
+                    <td>@evento.CupoMaximo</td>
+                    <td>@(responsable?.Nombre ?? "¿?") @(responsable?.Apellido)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Guid? idUsuario => Sesion.UsuarioActual?.id;
+    private List<EventoDeportivo> eventos = new();
+    private List<Persona> personas = new();
+
+    protected override void OnInitialized()
+    {
+        personas = RepoPersonas.Listar();
+        RefrescarListado();
+    }
+    private void RefrescarListado()
+    {
+        eventos = ListarEventos.Ejecutar();
+    }
+
+}

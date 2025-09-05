@@ -1,0 +1,15 @@
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\bin\Debug\net8.0\teoria8.exe
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\bin\Debug\net8.0\teoria8.deps.json
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\bin\Debug\net8.0\teoria8.runtimeconfig.json
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\bin\Debug\net8.0\teoria8.dll
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\bin\Debug\net8.0\teoria8.pdb
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\obj\Debug\net8.0\teoria8.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\obj\Debug\net8.0\teoria8.AssemblyInfoInputs.cache
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\obj\Debug\net8.0\teoria8.AssemblyInfo.cs
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\obj\Debug\net8.0\teoria8.csproj.CoreCompileInputs.cache
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\obj\Debug\net8.0\teoria8.sourcelink.json
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\obj\Debug\net8.0\teoria8.dll
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\obj\Debug\net8.0\refint\teoria8.dll
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\obj\Debug\net8.0\teoria8.pdb
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\obj\Debug\net8.0\teoria8.genruntimeconfig.cache
+C:\Users\chach\desktop\unlp\2do\.net\proyectosdotnet\teoria8\obj\Debug\net8.0\ref\teoria8.dll

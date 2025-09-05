@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * 
+ */
+module resueltos {
+	requires PaqueteLectura;
+}

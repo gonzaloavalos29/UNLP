@@ -1,0 +1,55 @@
+@page "/"
+@rendermode InteractiveServer
+
+@inject IniciarSesion LoginUseCase
+@inject ServicioSesionUsuario Sesion
+@inject ValidadorUsuario Validador
+@inject NavigationManager Nav
+
+<h3>Iniciar Sesión</h3>
+
+@if (Sesion.EstaLogeado)
+{
+    <div class="alert alert-warning mt-3">
+        Ya estás logueado como <strong>@Sesion.UsuarioActual!.nombre</strong>.
+        <button class="btn btn-danger btn-sm ms-2" @onclick="CerrarSesion">Cerrar sesión</button>
+    </div>
+}
+else
+{
+    @if (!string.IsNullOrEmpty(mensaje))
+    {
+        <div class="alert alert-danger">@mensaje</div>
+    }
+
+    <input @bind="email" placeholder="Email" class="form-control mb-2" />
+    <input type="password" @bind="password" placeholder="Contraseña" class="form-control mb-2" />
+    <button @onclick="Logear">Ingresar</button>
+}
+
+@code {
+    private string email = "";
+    private string password = "";
+    private string mensaje = "";
+
+    private void Logear()
+    {
+        mensaje = "";
+        try
+        {
+            var usuario = LoginUseCase.Ejecutar(email, password, Validador);
+            Sesion.IniciarSesion(usuario);
+            Nav.NavigateTo("/", forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            mensaje = ex.Message;
+        }
+    }
+
+    private void CerrarSesion()
+    {
+        Sesion.CerrarSesion();
+        Nav.NavigateTo("/", forceLoad: true);
+    }
+}

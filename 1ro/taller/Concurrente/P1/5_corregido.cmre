@@ -1,0 +1,105 @@
+programa p1Ej5
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    si (HayFlorEnLaEsquina)
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+        flores:= flores + 1
+  fin
+  proceso juntarPapeles(ES papeles: numero)
+  comenzar
+    si (HayPapelEnLaEsquina)
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+        papeles:= papeles + 1
+  fin
+  proceso limpiarFlores(ES flores: numero)
+  comenzar
+    si (PosAv = 1)
+      repetir 14
+        mover
+        juntarFlores(flores)
+    si (PosAv = 70)
+      repetir 30
+        mover
+        juntarFlores(flores)
+  fin
+  proceso limpiarPapeles(ES papeles: numero)
+  comenzar
+    si (PosCa = 1)
+      repetir 9
+        mover
+        juntarPapeles(papeles)
+    si (PosCa = 80)
+      repetir 20
+        mover
+        juntarPapeles(papeles)
+  fin
+  proceso posicionar
+  comenzar
+    si (PosAv = 15)
+      Pos(1, 80)
+    si (PosAv = 100)
+      Pos(70, 15)
+    si (PosAv = 10)
+      Pos(15, 1)
+    si (PosAv = 75)
+      Pos(80, 80)
+  fin
+areas
+  area1: AreaP(1,75,15,75)
+  area2: AreaP(1,80,15,80)
+  area3: AreaP(75,80,75,100)
+  area4: AreaP(80,80,80,100)
+  area5: AreaP(70,10,100,10)
+  area6: AreaP(70,15,100,15)
+  area7: AreaP(10,1,10,10)
+  area8: AreaP(15,1,15,10)
+robots
+  robot robot1
+  variables
+    flores: numero
+  comenzar
+    flores:= 0
+    derecha
+    limpiarFlores(flores)
+    posicionar
+    limpiarFlores(flores)
+    repetir flores
+      depositarFlor
+  fin
+  robot robot2
+  variables
+    papeles: numero
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    papeles:= 0
+    limpiarPapeles(papeles)
+    posicionar
+    limpiarPapeles(papeles)
+    Pos(avIni,caIni)
+    repetir papeles
+      depositarPapel
+  fin
+variables
+  r1: robot1
+  r2: robot2
+  r3: robot1
+  r4: robot2
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r1, area2)
+  AsignarArea(r2, area3)
+  AsignarArea(r2, area4)
+  AsignarArea(r3, area5)
+  AsignarArea(r3, area6)
+  AsignarArea(r4, area7)
+  AsignarArea(r4, area8)
+  Iniciar(r1,1,75)
+  Iniciar(r2,75,80)
+  Iniciar(r3,70,10)
+  Iniciar(r4,10,1)
+fin

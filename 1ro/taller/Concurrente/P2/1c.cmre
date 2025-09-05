@@ -1,0 +1,103 @@
+programa Practica2punto1
+procesos
+  proceso juntarFlores(ES contFlores:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      contFlores:=contFlores+1
+  fin
+  proceso recorrerAvenida(ES contFlores:numero)
+  variables
+    contFlores:numero
+  comenzar
+    contFlores:=0
+    repetir 9
+      juntarFlores(contFlores)
+      mover
+    juntarFlores(contFlores)  
+  fin
+areas
+  area1: AreaP(1,1,1,10)
+  area2: AreaP(2,11,2,20)
+  area3: AreaP(3,21,3,30)
+  area4: AreaP(4,31,4,40)
+  area5: AreaP(5,41,5,50)
+  area6: AreaP(6,51,6,60)
+  area7: AreaP(2,1,2,1)
+robots
+  robot fiscalizador
+  variables     
+    quien, flores1, flores2, flores3, flores4, flores5, flores6: numero
+    max, maxR: numero
+  comenzar
+    max:= -1
+    maxR:= -1
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+    EnviarMensaje(5,r5)
+    EnviarMensaje(6,r6)
+    repetir 6   
+      RecibirMensaje(quien,*)
+      si(quien = 1)
+        RecibirMensaje(flores1,r1)
+        si (flores1 > max)
+          max:= flores1
+          maxR:= 1
+      si(quien = 2)
+        RecibirMensaje(flores2,r2)
+        si (flores2 > max)
+          max:= flores2
+          maxR:= 2
+      si(quien = 3)
+        RecibirMensaje(flores3,r3)
+        si (flores3 > max)
+          max:= flores3
+          maxR:= 3
+      si(quien = 4)
+        RecibirMensaje(flores4,r4)
+        si (flores4 > max)
+          max:= flores4
+          maxR:= 4
+      si(quien = 5)
+        RecibirMensaje(flores5,r5)
+        si (flores5 > max)
+          max:= flores5
+          maxR:= 5
+      si(quien = 6)
+        RecibirMensaje(flores6,r6)
+        si (flores6 > max)
+          max:= flores6
+          maxR:= 6
+    Informar(max)
+    Informar("Robot ", maxR)
+  fin
+  robot juntador
+  variables
+    quienSoy, cantFlores:numero
+  comenzar
+    RecibirMensaje(quienSoy,rFiscalizador)
+    recorrerAvenida(cantFlores)
+    EnviarMensaje(quienSoy, rFiscalizador)
+    EnviarMensaje(cantFlores,rFiscalizador)
+  fin
+variables
+  r1, r2, r3, r4, r5, r6: juntador
+  rFiscalizador: fiscalizador
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area2)
+  AsignarArea(r3, area3)
+  AsignarArea(r4, area4)
+  AsignarArea(r5, area5)
+  AsignarArea(r6, area6)
+  AsignarArea(rFiscalizador, area7)
+  Iniciar(r1, 1, 1)
+  Iniciar(r2, 2, 11)
+  Iniciar(r3, 3, 21)
+  Iniciar(r4, 4, 31)
+  Iniciar(r5, 5, 41)
+  Iniciar(r6, 6, 51) 
+  Iniciar(rFiscalizador, 2, 1)
+fin

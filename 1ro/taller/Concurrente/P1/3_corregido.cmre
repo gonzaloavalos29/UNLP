@@ -1,0 +1,66 @@
+programa p1Ej3
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    si (HayFlorEnLaEsquina)
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+        flores:= flores + 1
+  fin
+  proceso juntarPapeles(ES papeles: numero)
+  comenzar
+    si (HayPapelEnLaEsquina)
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel 
+        papeles:= papeles + 1
+  fin
+  proceso evaluarMayor(ES flores: numero; ES papeles: numero)
+  comenzar
+    si (papeles > flores)
+      Informar(papeles)
+    sino
+      Informar(flores)
+  fin
+  proceso realizarEscalon(E veces: numero)
+  variables
+    aux, flores, papeles: numero
+  comenzar
+    aux:= 1
+    flores:= 0
+    papeles:= 0
+    repetir veces
+      repetir aux
+        juntarFlores(flores)
+        juntarPapeles(papeles)
+        mover
+      derecha
+      repetir aux
+        juntarFlores(flores)
+        juntarPapeles(papeles)
+        mover
+      juntarFlores(flores)
+      juntarPapeles(papeles)
+      aux:= aux + 1
+      repetir 3
+        derecha
+    evaluarMayor(flores, papeles)
+  fin
+areas
+  ciudad: AreaC(1,1,100,100)
+robots
+  robot robot1
+  comenzar
+    realizarEscalon(4)
+  fin
+variables
+  r1: robot1
+  r2: robot1
+  r3: robot1
+comenzar
+  AsignarArea(r1, ciudad)
+  AsignarArea(r2, ciudad)
+  AsignarArea(r3, ciudad)
+  Iniciar(r1,12,14)
+  Iniciar(r2,17,10)
+  Iniciar(r3,22,6)
+fin

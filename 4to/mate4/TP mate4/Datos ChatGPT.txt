@@ -1,0 +1,15 @@
+Dados los datos:
+{'sumX1': 539711.0, 'sumX2': 595093.0, 'sumX3': 17024.0, 'sumY': 10666243000.0, 
+'sumX1_2': 34594845.0, 'sumX2_2': 41869011.0, 'sumX3_2': 37826.0, 
+'sumX1X2': 37901766.0, 'sumX1X3': 1085732.0, 'sumX2X3': 1194677.0, 'sumX1Y': 776960450000.0, 
+'sumX2Y': 819503775000.0, 'sumX3Y': 23688148000.0, 
+'y/': 1252494.4809769846, 'x1/': 63.37611554720526, 'x2/': 69.87940347581024, 'x3/': 1.999060591827149, 'n': 8516, 
+'Syy': 6.7723006498740616e+16, 'Ssr': 3.814561822029126e+16, 
+'B0': -20427314.192251265, 'B1': 194146.68433384318, 'B2': 131309.3017062989, 'B3': 99912.07897099851, 
+'R2': 0.43674062637782296, 'R2a': 0.4366744539890045, 'r': 0.6608134789704312, 'o2': 4481393117985.346}
+
+ i) Usando el método de mínimos cuadrados. Explica los indicadores obtenidos (como el
+ coeficiente de determinación y la correlación) y proporciona una breve interpretación de los
+ resultados.
+
+1. Coeficientes de Regresión (B0, B1, B2, B3)

@@ -1,0 +1,14 @@
+3) No funciona porque la clase Taxi está tratando de acceder a la variable "velocidad" de la clase base, pero esto no es posible debido al nivel de accesibilidad de esta variable (implícitamente es privada). Para solucionarlo, basta simplemente con ponerle un modificador de acceso público o protegido a la variable.
+4) public Taxi() : base("Toyota") { }
+No es necesario utilizar : base ya que la clase Auto tiene un constructor vacío, por lo que la instancia de Taxi no requiere rellenar el campo Marca, campo que por defecto vale "Ford".
+5) La línea 8 y 9 [fallan] debido a la incoherencia de accesibilidad presentada por estar tratando de acceder a la clase implícitamente privada Persona.
+6)  6.1: no existe un método invalidable (keyword virtual)
+    6.2: una clase no-abstracta no puede tener un método abstracto.
+    6.3: los métodos abstractos son vacíos, no pueden tener un cuerpo.
+    6.4: el método sobreescribible de la clase A debe ser sobreescrito con algún método.
+    6.6: un miembro estático no puede ser también virtual o sobreescribible.
+    6.7: los miembros virtuales y sobreescribibles no pueden ser privados (se coloca el private por default)
+    6.8: falta pasar argumentos.
+    6.9: no se puede acceder a la variable _id debido a su nivel de accesibilidad.
+    6.10: el modificador de acceso del método de escritura de la propiedad debe ser más restrictivo o igual que la propiedad para la cual trabaja
+    6.11: la clase B no implementa la propiedad Prop como lo pide la clase abstracta A

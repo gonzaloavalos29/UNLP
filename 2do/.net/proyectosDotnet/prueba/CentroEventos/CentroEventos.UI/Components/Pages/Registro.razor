@@ -1,0 +1,66 @@
+@page "/registro"
+@rendermode InteractiveServer
+
+@inject RegistrarUsuarioUseCase CrearUsuario
+@inject ValidadorUsuario Validador
+@inject NavigationManager Nav
+@inject ServicioSesionUsuario Sesion
+
+<h3>Registro de Usuario</h3>
+
+@if (Sesion.EstaLogeado)
+{
+    <div class="alert alert-warning mt-3">
+        Ya estás logueado como <strong>@Sesion.UsuarioActual!.nombre</strong>.
+        <button class="btn btn-danger btn-sm ms-2" @onclick="CerrarSesion">Cerrar sesión</button>
+    </div>
+}
+else
+{
+    @if (!string.IsNullOrEmpty(mensaje))
+    {
+        <div class="alert @claseMensaje">@mensaje</div>
+    }
+
+    <input @bind="nuevo.nombre" placeholder="Nombre" class="form-control mb-2" />
+    <input @bind="nuevo.apellido" placeholder="Apellido" class="form-control mb-2" />
+    <input @bind="nuevo.email" placeholder="Email" class="form-control mb-2" />
+    <input type="password" @bind="password" placeholder="Contraseña" class="form-control mb-2" />
+    <button class="btn btn-success" @onclick="RegistrarUsuario">Registrar</button>
+}
+
+@code {
+    private Usuario nuevo = new();
+    private string password = "";
+    private string mensaje = "";
+    private string claseMensaje = "";
+
+    private void RegistrarUsuario()
+    {
+        mensaje = "";
+        claseMensaje = "";
+
+        try
+        {
+            nuevo.permisos = new List<Permiso>(); 
+            CrearUsuario.Ejecutar(nuevo, password,Validador);
+
+            mensaje = "Usuario registrado correctamente.";
+            claseMensaje = "alert-success";
+
+            Sesion.IniciarSesion(nuevo);
+            Nav.NavigateTo("/", forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            mensaje = ex.Message;
+            claseMensaje = "alert-danger";
+        }
+    }
+
+    private void CerrarSesion()
+    {
+        Sesion.CerrarSesion();
+        Nav.NavigateTo("/registro", forceLoad: true);
+    }
+}

@@ -1,0 +1,84 @@
+﻿@inject ServicioSesionUsuario Sesion
+@inject NavigationManager Nav
+@rendermode InteractiveServer
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">CentroEventos.UI</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="flex-column">
+
+        @if (!Sesion.EstaLogeado)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="/">
+                    <span class="bi bi-box-arrow-in-right" aria-hidden="true"></span> Login
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="/registro">
+                    <span class="bi bi-person-plus" aria-hidden="true"></span> Registro
+                </NavLink>
+            </div>
+        }
+        else
+        {
+            <div class="nav-item px-3">
+                <button class="nav-link btn btn-link p-0" @onclick="CerrarSesion">
+                    <span class="bi bi-box-arrow-right" aria-hidden="true"></span> Cerrar Sesión
+                </button>
+            </div>
+        }
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/listadoPersonas">
+                <span class="bi bi-plus-square-fill" aria-hidden="true"></span> Persona
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+<<<<<<< HEAD
+            <NavLink class="nav-link" href="/listadoreservas">
+                <span class="bi bi-journal-bookmark-fill" aria-hidden="true"></span> Reservas
+=======
+            <NavLink class="nav-link" href="/listadoeventos">
+                <span class="bi bi-list-nested" aria-hidden="true"></span> Eventos Deportivos
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/listadoReservas">
+                <span class="bi bi-journal-bookmark" aria-hidden="true"></span> Reserva
+>>>>>>> 21b69ffa5c38b31a5cdea5d6b29d656dc92a2325
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/listadousuarios">
+                <span class="bi bi-people" aria-hidden="true"></span> Usuarios
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+<<<<<<< HEAD
+            <NavLink class="nav-link" href="/listadoeventos">
+                <span class="bi bi-calendar-event" aria-hidden="true"></span> Eventos
+=======
+            <NavLink class="nav-link" href="/listaeventoscupo">
+                <span class="bi bi-people" aria-hidden="true"></span> Eventos con cupo
+>>>>>>> 21b69ffa5c38b31a5cdea5d6b29d656dc92a2325
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private void CerrarSesion()
+    {
+        Sesion.CerrarSesion();
+        Nav.NavigateTo("/");
+    }
+}

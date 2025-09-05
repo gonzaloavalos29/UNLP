@@ -1,0 +1,95 @@
+programa ej6P5
+procesos
+  proceso juntarPapeles(ES papeles: numero)
+  comenzar
+    si (HayPapelEnLaEsquina)
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+        papeles:= papeles + 1
+  fin
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    si (HayFlorEnLaEsquina)
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+        flores:= flores + 1
+  fin
+  proceso asegurarEsquina(E av: numero; E ca: numero)
+  comenzar
+    BloquearEsquina(av, ca)
+    mover
+    mover
+    LiberarEsquina(av, ca)
+  fin
+  proceso asegurarEsquina2(E av: numero; E ca: numero)
+  comenzar
+    BloquearEsquina(av, ca)
+    mover
+    derecha
+    mover
+    LiberarEsquina(av, ca)
+  fin
+  proceso realizarCuadranteFlores(E tamanio: numero; ES flores: numero)
+  variables
+    cuadrados: numero
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    derecha
+    repetir tamanio
+      repetir tamanio-1
+        juntarFlores(flores)
+        mover
+      Pos(avIni,PosCa+1)
+    juntarFlores(flores)
+    Pos(avIni, caIni)
+  fin
+  proceso realizarCuadrantePapeles(E tamanio: numero; ES papeles: numero)
+  variables
+    cuadrados: numero
+    avIni, caIni: numero
+  comenzar
+    avIni:= PosAv
+    caIni:= PosCa
+    derecha
+    repetir tamanio
+      repetir tamanio-1
+        juntarPapeles(papeles)
+        mover
+      Pos(avIni,PosCa+1)
+    juntarPapeles(papeles)
+    Pos(avIni, caIni)
+  fin
+areas
+  area1: AreaPC(2,2,16,16)
+  area2: AreaP(1,1,1,1)
+robots
+  robot tipo1
+  variables
+    flores: numero
+  comenzar
+    flores:= 0
+    si (PosAv = 2)
+      realizarCuadranteFlores(6, flores)
+    si (PosAv = 5)
+      realizarCuadranteFlores(10, flores)
+  fin
+  robot tipo2
+  variables
+    papeles: numero
+  comenzar
+    realizarCuadrantePapeles(7, papeles)
+  fin
+variables
+  r1: tipo1
+  r2: tipo1
+  r3: tipo2
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea(r2, area1)
+  AsignarArea(r3, area1)
+  Iniciar(r1,2,2)
+  Iniciar(r2,5,5)
+  Iniciar(r3,9,9)
+fin
