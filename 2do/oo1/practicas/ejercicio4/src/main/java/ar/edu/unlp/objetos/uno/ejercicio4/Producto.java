@@ -1,0 +1,51 @@
+package ar.edu.unlp.objetos.uno.ejercicio4;
+
+public class Producto {
+
+	private double peso;
+	private double precioPorKilo;
+	private String descripcion;
+	
+	public Producto(String descripcion, double peso, double precioPorKilo) {
+		this.peso = peso;
+		this.precioPorKilo = precioPorKilo;
+		this.descripcion = descripcion;
+	}
+	
+	public Producto agregarProd() {
+		Producto prod = null;
+		prod.descripcion = this.getDescripcion();
+		prod.peso = this.getPeso();
+		prod.precioPorKilo = this.precioPorKilo;
+		return prod;
+	}
+
+	public double getPrecio() {
+		return this.peso * this.precioPorKilo;
+	}
+
+	public double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(double peso) {
+		this.peso = peso;
+	}
+
+	public double getPrecioPorKilo() {
+		return precioPorKilo;
+	}
+
+	public void setPrecioPorKilo(double precioPorKilo) {
+		this.precioPorKilo = precioPorKilo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+}

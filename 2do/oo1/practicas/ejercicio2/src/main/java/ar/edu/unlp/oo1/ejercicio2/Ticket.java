@@ -8,6 +8,7 @@ public class Ticket extends Balanza {
 	private int cantidadDeProductos;
 	private double pesoTotal;
 	private double precioTotal;
+	
 	public Ticket(int cantidadDeProductos, double pesoTotal, double precioTotal) {
 		this.fecha = LocalDate.now();
 		this.cantidadDeProductos = cantidadDeProductos;
