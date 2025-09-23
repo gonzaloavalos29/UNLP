@@ -1,4 +1,4 @@
-package Ej5;
+package tp1.Ej5;
 
 public class Datos {
 

@@ -7,8 +7,6 @@ public class Estudiante {
 	private String email;
 	private String facultad;
 	
-	
-	
 	public Estudiante(String apellido, String nombre, String email, String facultad) {
 		this.setApellido(apellido);
 		this.setNombre(nombre);
