@@ -20,6 +20,12 @@ public class Ticket extends Balanza {
 		return this.precioTotal * 0.21;
 	}
 	
+	@Override
+	public String toString() {
+		return "Ticket [fecha=" + fecha + ", cantidadDeProductos=" + cantidadDeProductos + ", pesoTotal=" + pesoTotal
+				+ ", precioTotal=" + precioTotal + "]";
+	}
+
 	public LocalDate getFecha() {
 		return fecha;
 	}

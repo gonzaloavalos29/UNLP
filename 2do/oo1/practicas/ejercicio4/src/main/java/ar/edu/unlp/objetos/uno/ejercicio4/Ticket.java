@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ticket extends Balanza {
+public class Ticket{
 
 	private LocalDate fecha;
 	private int cantidadDeProductos;
@@ -19,11 +19,7 @@ public class Ticket extends Balanza {
 	}
 	
 	public double impuesto() {
-		return this.precioTotal * 0.21;
-	}
-	
-	public LocalDate getFecha() {
-		return fecha;
+		return this.getPrecioTotal() * 0.21;
 	}
 	public int getCantidadDeProductos() {
 		return cantidadDeProductos;
@@ -34,5 +30,7 @@ public class Ticket extends Balanza {
 	public double getPrecioTotal() {
 		return precioTotal;
 	}
-	
+	public LocalDate getFecha() {
+		return this.fecha;
+	}
 }

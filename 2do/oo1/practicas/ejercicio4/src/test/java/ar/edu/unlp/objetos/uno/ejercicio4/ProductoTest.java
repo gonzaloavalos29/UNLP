@@ -13,7 +13,7 @@ public class ProductoTest {
   void setUp() {
     // El producto se crea asignandole la descripción, el peso y el precio.
     // En este ejemplo, el peso es en kilos, lo mismo que su precio
-    queso = new Producto("Queso crema", 0.200, 14);
+    queso = new Producto();
   }
 
   @Test
