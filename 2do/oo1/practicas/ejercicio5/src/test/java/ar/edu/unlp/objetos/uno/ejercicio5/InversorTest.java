@@ -26,7 +26,7 @@ class InversorTest {
 
 	@Test
 	void testPlazoFijo() {
-		assertEquals(115, plazoFijo.valorActual());
+		assertEquals(120, plazoFijo.valorActual());
 	}
 
 	@Test
@@ -34,6 +34,6 @@ class InversorTest {
 		assertEquals(0, inversor.valorActual());
 		inversor.agregarInversion(accion);
 		inversor.agregarInversion(plazoFijo);
-		assertEquals(1115, inversor.valorActual());
+		assertEquals(1120, inversor.valorActual());
 	}
 }
