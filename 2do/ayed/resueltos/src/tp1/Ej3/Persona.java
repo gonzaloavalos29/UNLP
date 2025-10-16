@@ -6,6 +6,10 @@ public abstract class Persona {
 	private String apellido;
 	private String email;
 	
+	public Persona() {
+		
+	}
+	
 	public Persona(String nombre, String apellido, String email) {
 		this.setNombre(nombre);
 		this.setApellido(apellido);
@@ -30,7 +34,7 @@ public abstract class Persona {
 		this.email = email;
 	}
 	
-	public String toString() {
+	public String tusDatos() {
 		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + "]";
 	}
 	

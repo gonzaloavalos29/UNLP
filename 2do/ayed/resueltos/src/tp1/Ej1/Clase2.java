@@ -1,5 +1,6 @@
 package tp1.Ej1;
-public class Clase1 {
+
+public class Clase2 {
 	
 	public static void conFor(int a, int b) {
 		for (int i = a; i < b+1; i++)

@@ -5,11 +5,14 @@ public class Profesor extends Persona {
 	private String catedra;
 	private String facultad;
 	
+	public Profesor() {
+		
+	}
+	
 	public Profesor(String nom, String ape, String email, String catedra, String facultad) {
 		super(nom, ape, email);
 		this.setCatedra(catedra);
 		this.setFacultad(facultad);
-		
 	}
 
 	public String getCatedra() {
@@ -29,7 +32,7 @@ public class Profesor extends Persona {
 	}
 
 	@Override
-	public String toString() {
+	public String tusDatos() {
 		return super.toString()	+ " Catedra=" + this.getCatedra() + " Facultad=" + this.getFacultad() + " ";
  	}
 	

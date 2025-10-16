@@ -5,7 +5,9 @@ public class Estudiante extends Persona{
 	private String comision;
 	private String direccion;
 	
-	
+	public Estudiante() {
+		
+	}
 	
 	public Estudiante(String nombre, String apellido, String email, String comision, String direccion) {
 		super(nombre, apellido, email);
@@ -27,7 +29,7 @@ public class Estudiante extends Persona{
 	}
 	
 	@Override
-	public String toString() {
+	public String tusDatos() {
 		return super.toString() + " Comision=" + this.getComision() + " Direccion=" + this.getDireccion();
   	}
 	
