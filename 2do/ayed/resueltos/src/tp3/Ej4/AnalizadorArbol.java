@@ -16,6 +16,7 @@ interna representada con int. */
 
 package tp3.Ej4;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import tp1.Ej8.Queue;
@@ -25,7 +26,7 @@ public class AnalizadorArbol {
 
 	public double devolverMaximoPromedio(GeneralTree<AreaEmpresa> arbol) {
 		if (arbol.isEmpty()) return 0;
-		else return (!arbol.isLeaf()) ? devolverMaximoPromedioHelper(arbol) : arbol.getData().getTardanza());
+		else return (!arbol.isLeaf()) ? devolverMaximoPromedioHelper(arbol) : arbol.getData().getTardanza();
 	}
 	
 	private double devolverMaximoPromedioHelper(GeneralTree<AreaEmpresa> arbol) {
