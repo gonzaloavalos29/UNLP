@@ -1,52 +1,50 @@
-program parcial;
 const
-	VA = 9999;
-	MAX = -1;
+	va = 9999;
+	max = -1;
 type
 	str30 = string[30];
-	pres = record
+	pres = record // presentacion
 		codArtista: integer;
 		nombreArtista: str30;
 		año: integer;
 		codEvento: integer;
-		nombreEvento: string;
+		nombreEvento: str30;
 		cantLikes: longInt;
 		cantDislikes: longInt;
 		puntaje: real;
 	end;
-	archivo = file of pres;
+	archivo = file of tRegistro;
 	
-procedure leer(var arc: archivo; var reg: pres);
+procedure leer(var a: archivo; var reg: pres);
 begin
-	if (not EOF(arc)) then
-		read(arc, reg)
+	if (not EOF(a)) then
+		read(a, reg)
 	else
-		reg.año:= VA;
+		reg.año:= va;
 end;
-procedure procesar(var arc: archivo);
+procedure informe(var a: archivo);
 var
 	reg, act: pres;
-	presPorAnio, años: integer;
-	puntajeMin, presTotal: real;
-	nombreArtista: str30;
+	años, presAño, presTot: integer;
+	puntajeMin: real;
+	artistaMin: str30;
 	dislikesMax: longInt;
 begin
-	assign(arc, 'archivo.txt');
-	reset(arc);
 	años:= 0;
-	leer(arc, reg);
-	presTotal:= 0;
-	writeln('Resumen de menor influencia por evento');
-	while (arc.año != valor_alto) do begin
+	reset(a);
+	leer(a, reg);
+	presTot:= 0;
+	writeln('Resumen de menor influencia por evento.');
+	while (reg.año <> va) do begin
 		act.año:= reg.año;
-		writeln('Año: ', añoAct);
+		writeln('Año: ', act.año);
 		años:= años + 1;
-		presPorAnio:= 0;
-		while (añoAct = reg.año) do begin
+		presAño:= 0;
+		while (act.año = reg.año) do begin
 			act.codEvento:= reg.codEvento;
 			act.nombreEvento:= reg.nombreEvento;
-			puntajeMin:= VA;
-			dislikesMax:= MAX;
+			puntajeMin:= va;
+			dislikesMax:= max;
 			writeln('Evento: ', act.nombreEvento, ' (Código: ', act.codEvento, ')');
 			while (act.año = reg.año) and (act.codEvento = reg.codEvento) do begin
 				act.codArtista:= reg.codArtista;
@@ -54,33 +52,33 @@ begin
 				act.cantLikes:= 0;
 				act.cantDislikes:= 0;
 				act.puntaje:= 0;
-				writeln('Artista: ', act.nombreArtista, ' (Código: ', act.codArtista, ')'=;
+				writeln('Artista: ', act.nombreArtista, ' (Código: ', act.codArtista, ')');
 				while (act.año = reg.año) and (act.codEvento = reg.codEvento) and (act.codArtista = reg.codArtista) do begin
-					act.cantlikes:= act.cantLikes + reg.cantLikes);
+					act.cantLikes:= act.cantLikes + reg.cantLikes;
 					act.cantDislikes:= act.cantDislikes + reg.cantDislikes;
 					act.puntaje:= act.puntaje + reg.puntaje;
-					presPorAnio:= presPorAnio + 1;
+					presAño:= presAño + 1;
 					leer(a, reg);
 				end;
 				if (act.puntaje < puntajeMin) or ((act.puntaje = puntajeMin) and (act.cantDislikes > dislikesMax)) then begin
 					puntajeMin:= act.puntaje;
 					dislikesMax:= act.cantDislikes;
-					nombreArtista:= act.nombreArtista;
+					artistaMin:= act.nombreArtista;
 				end;
 				writeln('Likes totales: ', act.cantLikes);
 				writeln('Dislikes totales: ', act.cantDislikes);
 				writeln('Diferencia: ', (act.cantLikes - act.cantDislikes));
 				writeln('Puntaje total del jurado: ', act.puntaje);
 			end;
-			writeln('El artista ', nombreArtista, ' fue el menos influyente de ', act.nombreEvento, ' del año ', act.año, '.');
+			writeln('El artista ', artistaMin, ' fue el menos influyente de ', act.nombreEvento, ' del año ', act.año, '.');
 		end;
-		writeln('Durante el año ', act.año, ' se registraron ', presPorAnio, ' de presentaciones de artistas.');
-		presTot:= presTot + presPorAnio;
+		writeln('Durante el año ', act.año, ' se registraron ', presAño, ' de presentaciones de artistas.');
+		presTot:= presTot + presAño;
 	end;
 	writeln;
 	if (años > 0) then
-		writeln('El promedio total de presentaciones por año es de: ', (presentacionesTotal / años):0:2, ' presentaciones.');
+		writeln('El promedio total de presentaciones por año es de: ', (presTot / años):0:2, ' presentaciones.');
 	else
 		writeln('No se registraron presentaciones.');
-	close(arc);
+	close(a);
 end;
