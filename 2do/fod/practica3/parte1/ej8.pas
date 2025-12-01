@@ -1,4 +1,4 @@
-{8. Se cuenta con un archivo con información de las diferentes distribuciones de linux
+10{8. Se cuenta con un archivo con información de las diferentes distribuciones de linux
 existentes. De cada distribución se conoce: nombre, año de lanzamiento, número de
 versión del kernel, cantidad de desarrolladores y descripción. El nombre de las
 distribuciones no puede repetirse. Este archivo debe ser mantenido realizando bajas
