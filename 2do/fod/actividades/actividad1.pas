@@ -56,8 +56,8 @@ begin
 			write(arc, mas);
 			seek(arc, 0);
 			write(arc, cabecera);
-			close(arc);
 		end;
+		close(arc);
 		writeln('Se dio de alta la nueva mascota');
 	end else
 		writeln('La mascota ya existe');
@@ -79,9 +79,9 @@ begin
 		read(arc, mas);
 		seek(arc, filepos(arc)-1);
 		write(arc, cabecera);
-		cabecera.cod:= (filepos(arc)-1) * -1;
+		mas.cod:= (filepos(arc)-1) * -1;
 		seek(arc, 0);
-		write(arc, cabecera);
+		write(arc, mas);
 		close(arc);
 		writeln('Se elimino del archivo la mascota con codigo: ', codMas);
 	end;
