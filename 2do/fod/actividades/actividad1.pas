@@ -45,17 +45,17 @@ begin
 	pos:= ExisteMascota(arc, mas.cod);
 	if (pos = 0) then begin
 		reset(arc);
-		read(arc, cabecera);
+		read(arc, cabecera); // leo la cabecera
 		if (cabecera.cod = 0) then begin
-			seek(arc, filesize(arc));
-			write(arc, mas);
+			seek(arc, filesize(arc)); // voy al fin del archivo para agregar la nueva mascota debido a que no tengo espacios libres en el archivo
+			write(arc, mas); // agrego la nueva mascota
 		end else begin
-			seek(arc, cabecera.cod * -1);
-			read(arc, cabecera);
-			seek(arc, filepos(arc)-1);
-			write(arc, mas);
-			seek(arc, 0);
-			write(arc, cabecera);
+			seek(arc, cabecera.cod * -1); // voy a la posición donde tengo libre un espacio que me indica el registro cabecera (en negativo)
+			read(arc, cabecera); // leo el nuevo registro cabecera
+			seek(arc, filepos(arc)-1); // vuelvo a la posición anterior para dar de alta el registro mascota
+			write(arc, mas); // agrego la nueva mascota
+			seek(arc, 0); // voy a la cabecera
+			write(arc, cabecera); // escribo el nuevo registro cabecera
 		end;
 		close(arc);
 		writeln('Se dio de alta la nueva mascota');
@@ -74,14 +74,14 @@ begin
 		writeln('No existe la mascota con codigo ', codMas)
 	else begin
 		reset(arc);
-		read(arc, cabecera);
-		seek(arc, pos);
-		read(arc, mas);
-		seek(arc, filepos(arc)-1);
-		write(arc, cabecera);
-		mas.cod:= (filepos(arc)-1) * -1;
-		seek(arc, 0);
-		write(arc, mas);
+		read(arc, cabecera); // leo el registro cabecera.
+		seek(arc, pos); // voy a la posición donde tengo el registro a eliminar.
+		read(arc, mas); // leo el registro a eliminar (nuevo espacio libre) que será la nueva dirección del registro cabecera.
+		seek(arc, filepos(arc)-1); // vuelvo al registro a eliminar.
+		write(arc, cabecera); // sobreescribo con mi registro cabecera para guardar la posición del próximo espacio libre del archivo (en el campo código).
+		mas.cod:= (filepos(arc)-1) * -1; // guardo la posición del nuevo espacio libre.
+		seek(arc, 0); // voy al registro cabecera.
+		write(arc, mas); // escribo el nuevo registro cabecera.
 		close(arc);
 		writeln('Se elimino del archivo la mascota con codigo: ', codMas);
 	end;
