@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * 
+ */
+module practicas {
+	requires PaqueteLectura;
+}
